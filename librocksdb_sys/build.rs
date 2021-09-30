@@ -124,7 +124,7 @@ fn link_cpp(build: &mut Build) {
 
 fn build_rocksdb() -> Build {
     let target = env::var("TARGET").expect("TARGET was not set");
-    let mut cfg = Config::new("rocksdb");
+    let mut cfg = Config::new("terarkdb");
     if cfg!(feature = "encryption") {
         cfg.register_dep("OPENSSL").define("WITH_OPENSSL", "ON");
         println!("cargo:rustc-link-lib=static=crypto");
