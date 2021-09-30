@@ -7,3 +7,7 @@
 	url = https://github.com/tikv/titan.git
 	branch = tikv-4.x
 
+[submodule "librocksdb_sys/terarkdb"]
+	path = librocksdb_sys/terarkdb
+	url = https://github.com/bytedance/terarkdb.git
+	branch = master

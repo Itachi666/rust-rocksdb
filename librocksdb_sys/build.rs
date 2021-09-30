@@ -163,7 +163,7 @@ fn build_rocksdb() -> Build {
         .define("WITH_SNAPPY", "ON")
         .define("WITH_TESTS", "OFF")
         .define("WITH_TOOLS", "OFF")
-        .build_target("rocksdb")
+        .build_target("terarkdb")
         .very_verbose(true)
         .build();
     let build_dir = format!("{}/build", dst.display());
@@ -188,8 +188,8 @@ fn build_rocksdb() -> Build {
     config_binding_path();
 
     let cur_dir = env::current_dir().unwrap();
-    build.include(cur_dir.join("rocksdb").join("include"));
-    build.include(cur_dir.join("rocksdb"));
+    build.include(cur_dir.join("terarkdb").join("include"));
+    build.include(cur_dir.join("terarkdb"));
     build.include(cur_dir.join("libtitan_sys").join("titan").join("include"));
     build.include(cur_dir.join("libtitan_sys").join("titan"));
 
