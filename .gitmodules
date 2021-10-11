@@ -11,3 +11,6 @@
 	path = librocksdb_sys/terarkdb
 	url = https://github.com/bytedance/terarkdb.git
 	branch = master
+[submodule "librocksdb_sys/libterark-zip_sys/terark-zip"]
+	path = librocksdb_sys/libterark-zip_sys/terark-zip
+	url = https://github.com/bytedance/terark-zip.git
