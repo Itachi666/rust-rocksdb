@@ -197,9 +197,9 @@ fn build_rocksdb() -> Build {
     // Adding rocksdb specific compile macros.
     // TODO: should make sure crocksdb compile options is the same as rocksdb and titan.
     build.define("ROCKSDB_SUPPORT_THREAD_LOCAL", None);
-    // if cfg!(feature = "encryption") {
-    //     build.define("OPENSSL", None);
-    // }
+    if cfg!(feature = "encryption") {
+        build.define("OPENSSL", None);
+    }
 
     println!("cargo:rustc-link-lib=static=terarkdb");
     println!("cargo:rustc-link-lib=static=titan");
