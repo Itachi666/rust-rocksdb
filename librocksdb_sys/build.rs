@@ -126,8 +126,8 @@ fn build_rocksdb() -> Build {
     let target = env::var("TARGET").expect("TARGET was not set");
     let mut cfg = Config::new("terarkdb");
     if cfg!(feature = "encryption") {
-        cfg.register_dep("OPENSSL").define("WITH_OPENSSL", "ON");
-        println!("cargo:rustc-link-lib=static=crypto");
+        // cfg.register_dep("OPENSSL").define("WITH_OPENSSL", "ON");
+        // println!("cargo:rustc-link-lib=static=crypto");
     }
     if cfg!(feature = "jemalloc") && NO_JEMALLOC_TARGETS.iter().all(|i| !target.contains(i)) {
         cfg.register_dep("JEMALLOC").define("WITH_JEMALLOC", "ON");
@@ -197,9 +197,9 @@ fn build_rocksdb() -> Build {
     // Adding rocksdb specific compile macros.
     // TODO: should make sure crocksdb compile options is the same as rocksdb and titan.
     build.define("ROCKSDB_SUPPORT_THREAD_LOCAL", None);
-    if cfg!(feature = "encryption") {
-        build.define("OPENSSL", None);
-    }
+    // if cfg!(feature = "encryption") {
+    //     build.define("OPENSSL", None);
+    // }
 
     println!("cargo:rustc-link-lib=static=terarkdb");
     println!("cargo:rustc-link-lib=static=titan");

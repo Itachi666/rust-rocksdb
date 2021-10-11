@@ -179,10 +179,14 @@ using rocksdb::kMaxSequenceNumber;
 using rocksdb::MemoryAllocator;
 
 #ifdef OPENSSL
-using rocksdb::encryption::EncryptionMethod;
-using rocksdb::encryption::FileEncryptionInfo;
-using rocksdb::encryption::KeyManager;
-using rocksdb::encryption::NewKeyManagedEncryptedEnv;
+// using rocksdb::encryption::EncryptionMethod;
+// using rocksdb::encryption::FileEncryptionInfo;
+// using rocksdb::encryption::KeyManager;
+// using rocksdb::encryption::NewKeyManagedEncryptedEnv;
+struct EncryptionMethod {};
+struct FileEncryptionInfo {};
+struct KeyManager {};
+struct NewKeyManagedEncryptedEnv{};
 #endif
 
 using std::shared_ptr;
@@ -3699,74 +3703,77 @@ crocksdb_encryption_method_t crocksdb_file_encryption_info_method(
     crocksdb_file_encryption_info_t* file_info) {
   assert(file_info != nullptr);
   assert(file_info->rep != nullptr);
-  switch (file_info->rep->method) {
-    case EncryptionMethod::kUnknown:
-      return crocksdb_encryption_method_t::kUnknown;
-    case EncryptionMethod::kPlaintext:
-      return crocksdb_encryption_method_t::kPlaintext;
-    case EncryptionMethod::kAES128_CTR:
-      return crocksdb_encryption_method_t::kAES128_CTR;
-    case EncryptionMethod::kAES192_CTR:
-      return crocksdb_encryption_method_t::kAES192_CTR;
-    case EncryptionMethod::kAES256_CTR:
-      return crocksdb_encryption_method_t::kAES256_CTR;
-    default:
-      assert(false);
-  }
+  // switch (file_info->rep->method) {
+  //   case EncryptionMethod::kUnknown:
+  //     return crocksdb_encryption_method_t::kUnknown;
+  //   case EncryptionMethod::kPlaintext:
+  //     return crocksdb_encryption_method_t::kPlaintext;
+  //   case EncryptionMethod::kAES128_CTR:
+  //     return crocksdb_encryption_method_t::kAES128_CTR;
+  //   case EncryptionMethod::kAES192_CTR:
+  //     return crocksdb_encryption_method_t::kAES192_CTR;
+  //   case EncryptionMethod::kAES256_CTR:
+  //     return crocksdb_encryption_method_t::kAES256_CTR;
+  //   default:
+  //     assert(false);
+  // }
+  return nullptr;
 }
 
 const char* crocksdb_file_encryption_info_key(
     crocksdb_file_encryption_info_t* file_info, size_t* keylen) {
-  assert(file_info != nullptr);
-  assert(file_info->rep != nullptr);
-  assert(keylen != nullptr);
-  *keylen = file_info->rep->key.size();
-  return file_info->rep->key.c_str();
+  return nullptr;
+  // assert(file_info != nullptr);
+  // assert(file_info->rep != nullptr);
+  // assert(keylen != nullptr);
+  // *keylen = file_info->rep->key.size();
+  // return file_info->rep->key.c_str();
 }
 
 const char* crocksdb_file_encryption_info_iv(
     crocksdb_file_encryption_info_t* file_info, size_t* ivlen) {
-  assert(file_info != nullptr);
-  assert(file_info->rep != nullptr);
-  assert(ivlen != nullptr);
-  *ivlen = file_info->rep->iv.size();
-  return file_info->rep->iv.c_str();
+  return nullptr;
+  // assert(file_info != nullptr);
+  // assert(file_info->rep != nullptr);
+  // assert(ivlen != nullptr);
+  // *ivlen = file_info->rep->iv.size();
+  // return file_info->rep->iv.c_str();
 }
 
 void crocksdb_file_encryption_info_set_method(
     crocksdb_file_encryption_info_t* file_info, crocksdb_encryption_method_t method) {
   assert(file_info != nullptr);
-  switch (method) {
-    case kUnknown:
-      file_info->rep->method = EncryptionMethod::kUnknown;
-      break;
-    case kPlaintext:
-      file_info->rep->method = EncryptionMethod::kPlaintext;
-      break;
-    case kAES128_CTR:
-      file_info->rep->method = EncryptionMethod::kAES128_CTR;
-      break;
-    case kAES192_CTR:
-      file_info->rep->method = EncryptionMethod::kAES192_CTR;
-      break;
-    case kAES256_CTR:
-      file_info->rep->method = EncryptionMethod::kAES256_CTR;
-      break;
-    default:
-      assert(false);
-  };
+  // switch (method) {
+  //   case kUnknown:
+  //     file_info->rep->method = EncryptionMethod::kUnknown;
+  //     break;
+  //   case kPlaintext:
+  //     file_info->rep->method = EncryptionMethod::kPlaintext;
+  //     break;
+  //   case kAES128_CTR:
+  //     file_info->rep->method = EncryptionMethod::kAES128_CTR;
+  //     break;
+  //   case kAES192_CTR:
+  //     file_info->rep->method = EncryptionMethod::kAES192_CTR;
+  //     break;
+  //   case kAES256_CTR:
+  //     file_info->rep->method = EncryptionMethod::kAES256_CTR;
+  //     break;
+  //   default:
+  //     assert(false);
+  // };
 }
 
 void crocksdb_file_encryption_info_set_key(
     crocksdb_file_encryption_info_t* file_info, const char* key, size_t keylen) {
   assert(file_info != nullptr);
-  file_info->rep->key = std::string(key, keylen);
+  // file_info->rep->key = std::string(key, keylen);
 }
 
 void crocksdb_file_encryption_info_set_iv(
     crocksdb_file_encryption_info_t* file_info, const char* iv, size_t ivlen) {
   assert(file_info != nullptr);
-  file_info->rep->iv = std::string(iv, ivlen);
+  // file_info->rep->iv = std::string(iv, ivlen);
 }
 
 struct crocksdb_encryption_key_manager_impl_t : public KeyManager {
