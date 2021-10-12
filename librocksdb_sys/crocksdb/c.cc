@@ -2945,7 +2945,7 @@ uint64_t crocksdb_options_statistics_get_ticker_count(crocksdb_options_t* opt,
                                                       uint32_t ticker_type) {
   if (opt->rep.statistics) {
     rocksdb::Statistics* statistics = opt->rep.statistics.get();
-    return statistics->getTickerCount(ticker_type);
+    return statistics->getTickerCount(ticker_type % 106);
   }
   return 0;
 }
@@ -2954,7 +2954,7 @@ uint64_t crocksdb_options_statistics_get_and_reset_ticker_count(crocksdb_options
                                                                 uint32_t ticker_type) {
   if (opt->rep.statistics) {
     rocksdb::Statistics* statistics = opt->rep.statistics.get();
-    return statistics->getAndResetTickerCount(ticker_type);
+    return statistics->getAndResetTickerCount(ticker_type % 106);
   }
   return 0;
 }
@@ -2963,7 +2963,7 @@ char* crocksdb_options_statistics_get_histogram_string(crocksdb_options_t* opt,
                                                        uint32_t type) {
   if (opt->rep.statistics) {
     rocksdb::Statistics* statistics = opt->rep.statistics.get();
-    return strdup(statistics->getHistogramString(type).c_str());
+    return strdup(statistics->getHistogramString(type % 35).c_str());
   }
   return nullptr;
 }
@@ -2980,7 +2980,7 @@ unsigned char crocksdb_options_statistics_get_histogram(
   if (opt->rep.statistics) {
     rocksdb::Statistics* statistics = opt->rep.statistics.get();
     crocksdb_histogramdata_t data;
-    statistics->histogramData(type, &data.rep);
+    statistics->histogramData(type % 35, &data.rep);
     *median = data.rep.median;
     *percentile95 = data.rep.percentile95;
     *percentile99 = data.rep.percentile99;
