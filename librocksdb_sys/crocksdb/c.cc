@@ -4959,7 +4959,6 @@ struct ExternalSstFileModifier {
   }
 
   Status SetGlobalSeqNo(uint64_t seq_no, uint64_t *pre_seq_no) {
-    return Status::NotSupported("unsupport func");
     if (table_reader_ == nullptr) {
       return Status::InvalidArgument("File is not open or seq-no has been modified");
     }
@@ -4981,15 +4980,15 @@ struct ExternalSstFileModifier {
       return Status::Corruption("External file global sequence number not found");
     }
     *pre_seq_no = DecodeFixed64(seqno_iter->second.c_str());
-    uint64_t offset = 0;
-    // uint64_t offset = props->properties_offsets.at(ExternalSstFilePropertyNames::kGlobalSeqno);
-    // if (offset == 0) {
-    //   return Status::Corruption("Was not able to find file global seqno field");
-    // }
 
     if (*pre_seq_no == seq_no) {
       // This file already have the correct global seqno
       return Status::OK();
+    }
+
+    uint64_t offset = properties_offsets.at(ExternalSstFilePropertyNames::kGlobalSeqno);
+    if (offset == 0) {
+      return Status::Corruption("Was not able to find file global seqno field");
     }
 
     std::unique_ptr<RandomRWFile> rwfile;
@@ -5001,6 +5000,8 @@ struct ExternalSstFileModifier {
     // Write the new seqno in the global sequence number field in the file
     std::string seqno_val;
     PutFixed64(&seqno_val, seq_no);
+    properties_offsets.insert(
+        {ExternalSstFilePropertyNames::kGlobalSeqno, offset + seqno_val.size()});
     status = rwfile->Write(offset, seqno_val);
     return status;
   }
@@ -5011,6 +5012,7 @@ struct ExternalSstFileModifier {
     ColumnFamilyHandle* handle_;
     std::string file_;
     std::unique_ptr<TableReader> table_reader_;
+    std::map<std::string, uint64_t> properties_offsets;
 };
 
 // !!! this function is dangerous because it uses rocksdb's non-public API !!!
