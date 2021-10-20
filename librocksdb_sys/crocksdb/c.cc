@@ -584,14 +584,13 @@ static char* CopyString(const std::string& str) {
 }
 
 static void PrintLog(const char* function) {
-  char* logpath = "/home/CORP/junxiang.niu/rocksdb-log/rocksdb.log";
+  // char* logpath = "/home/CORP/junxiang.niu/rocksdb-log/rocksdb.log";
   std::shared_ptr<Logger> logger;
   Env* env = new rocksdb::EnvWrapper(Env::Default());
-  env->NewLogger(logpath, &logger);
+  env->NewLogger("", &logger);
   logger->SetInfoLogLevel(InfoLogLevel::INFO_LEVEL);
   ROCKS_LOG_INFO(logger, "Calling %s", function);
   delete env;
-  delete logpath;
 }
 
 crocksdb_t* crocksdb_open(
