@@ -742,7 +742,6 @@ void crocksdb_backup_engine_close(crocksdb_backup_engine_t* be) {
 
 void crocksdb_close(crocksdb_t* db) {
   ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
-  delete logger;
   delete db->rep;
   delete db;
 }
