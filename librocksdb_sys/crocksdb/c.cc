@@ -584,10 +584,9 @@ static char* CopyString(const std::string& str) {
 }
 
 static void PrintLog(const char* function) {
-  // char* logpath = "/home/CORP/junxiang.niu/rocksdb-log/rocksdb.log";
   std::shared_ptr<Logger> logger;
   Env* env = new rocksdb::EnvWrapper(Env::Default());
-  env->NewLogger("", &logger);
+  env->NewLogger("/tmp/tikv.log", &logger);
   logger->SetInfoLogLevel(InfoLogLevel::INFO_LEVEL);
   ROCKS_LOG_INFO(logger, "Calling %s", function);
   delete env;
