@@ -2359,6 +2359,8 @@ void crocksdb_options_set_info_log(crocksdb_options_t* opt, crocksdb_logger_t* l
     opt->rep.info_log = l->rep;
     logger = l->rep;
     logger->SetInfoLogLevel(InfoLogLevel::DEBUG_LEVEL);
+    ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
+    ROCKS_LOG_HEADER(logger, "Calling %s", __FUNCTION__);
   }
 }
 
