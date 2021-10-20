@@ -2541,12 +2541,12 @@ void crocksdb_options_set_compression_per_level(crocksdb_options_t* opt,
   }
 }
 
-size_t crocksdb_options_get_compression_level_number(crocksdb_options_t* opt) {
+size_t crocksdb_options_get_compression_level_number(crocksdb_options_t* opt) { PrintLog(__FUNCTION__);
   return opt->rep.compression_per_level.size();
 }
 
 void crocksdb_options_get_compression_per_level(crocksdb_options_t* opt,
-                                               int* level_values) {
+                                               int* level_values) { PrintLog(__FUNCTION__);
   for (size_t i = 0; i < opt->rep.compression_per_level.size(); i++) {
     level_values[i] = static_cast<int>(opt->rep.compression_per_level[i]);
   }
@@ -2554,46 +2554,46 @@ void crocksdb_options_get_compression_per_level(crocksdb_options_t* opt,
 
 void crocksdb_options_set_compression_options(crocksdb_options_t* opt, int w_bits,
                                              int level, int strategy,
-                                             int max_dict_bytes) {
+                                             int max_dict_bytes) { PrintLog(__FUNCTION__);
   opt->rep.compression_opts.window_bits = w_bits;
   opt->rep.compression_opts.level = level;
   opt->rep.compression_opts.strategy = strategy;
   opt->rep.compression_opts.max_dict_bytes = max_dict_bytes;
 }
 
-void crocksdb_options_set_use_direct_reads(crocksdb_options_t* opt, unsigned char v) {
+void crocksdb_options_set_use_direct_reads(crocksdb_options_t* opt, unsigned char v) { PrintLog(__FUNCTION__);
   opt->rep.use_direct_reads = v;
 }
 
 void crocksdb_options_set_use_direct_io_for_flush_and_compaction(
-    crocksdb_options_t *opt, unsigned char v) {
+    crocksdb_options_t *opt, unsigned char v) { PrintLog(__FUNCTION__);
   opt->rep.use_direct_io_for_flush_and_compaction = v;
 }
 
 void crocksdb_options_set_prefix_extractor(
-    crocksdb_options_t* opt, crocksdb_slicetransform_t* prefix_extractor) {
+    crocksdb_options_t* opt, crocksdb_slicetransform_t* prefix_extractor) { PrintLog(__FUNCTION__);
   opt->rep.prefix_extractor.reset(prefix_extractor);
 }
 
 void crocksdb_options_set_optimize_filters_for_hits(
-    crocksdb_options_t* opt, unsigned char v) {
+    crocksdb_options_t* opt, unsigned char v) { PrintLog(__FUNCTION__);
   opt->rep.optimize_filters_for_hits = v;
 }
 
 void crocksdb_options_set_memtable_insert_with_hint_prefix_extractor(
-    crocksdb_options_t* opt, crocksdb_slicetransform_t* prefix_extractor) {
+    crocksdb_options_t* opt, crocksdb_slicetransform_t* prefix_extractor) { PrintLog(__FUNCTION__);
   opt->rep.memtable_insert_with_hint_prefix_extractor.reset(prefix_extractor);
 }
 
 void crocksdb_options_set_use_fsync(
-    crocksdb_options_t* opt, int use_fsync) {
+    crocksdb_options_t* opt, int use_fsync) { PrintLog(__FUNCTION__);
   opt->rep.use_fsync = use_fsync;
 }
 
 void crocksdb_options_set_db_paths(crocksdb_options_t *opt,
                                    const char *const *dbpath_list,
                                    const size_t *path_lens,
-                                   const uint64_t *target_size, int num_paths) {
+                                   const uint64_t *target_size, int num_paths) { PrintLog(__FUNCTION__);
   std::vector<DbPath> db_paths;
   for (int i = 0; i < num_paths; ++i) {
     db_paths.emplace_back(
@@ -2602,74 +2602,74 @@ void crocksdb_options_set_db_paths(crocksdb_options_t *opt,
   opt->rep.db_paths = db_paths;
 }
 
-size_t crocksdb_options_get_db_paths_num(crocksdb_options_t *opt) {
+size_t crocksdb_options_get_db_paths_num(crocksdb_options_t *opt) { PrintLog(__FUNCTION__);
   return opt->rep.db_paths.size();
 }
 
-const char* crocksdb_options_get_db_path(crocksdb_options_t* opt, size_t index) {
+const char* crocksdb_options_get_db_path(crocksdb_options_t* opt, size_t index) { PrintLog(__FUNCTION__);
   return opt->rep.db_paths[index].path.data();
 }
 
-uint64_t crocksdb_options_get_path_target_size(crocksdb_options_t* opt, size_t index) {
+uint64_t crocksdb_options_get_path_target_size(crocksdb_options_t* opt, size_t index) { PrintLog(__FUNCTION__);
   return opt->rep.db_paths[index].target_size;
 }
 
 void crocksdb_options_set_db_log_dir(
-    crocksdb_options_t* opt, const char* db_log_dir) {
+    crocksdb_options_t* opt, const char* db_log_dir) { PrintLog(__FUNCTION__);
   opt->rep.db_log_dir = db_log_dir;
 }
 
 void crocksdb_options_set_wal_dir(
-    crocksdb_options_t* opt, const char* v) {
+    crocksdb_options_t* opt, const char* v) { PrintLog(__FUNCTION__);
   opt->rep.wal_dir = v;
 }
 
-void crocksdb_options_set_wal_ttl_seconds(crocksdb_options_t* opt, uint64_t ttl) {
+void crocksdb_options_set_wal_ttl_seconds(crocksdb_options_t* opt, uint64_t ttl) { PrintLog(__FUNCTION__);
   opt->rep.WAL_ttl_seconds = ttl;
 }
 
 void crocksdb_options_set_wal_size_limit_mb(
-    crocksdb_options_t* opt, uint64_t limit) {
+    crocksdb_options_t* opt, uint64_t limit) { PrintLog(__FUNCTION__);
   opt->rep.WAL_size_limit_MB = limit;
 }
 
 void crocksdb_options_set_manifest_preallocation_size(
-    crocksdb_options_t* opt, size_t v) {
+    crocksdb_options_t* opt, size_t v) { PrintLog(__FUNCTION__);
   opt->rep.manifest_preallocation_size = v;
 }
 
 void crocksdb_options_set_allow_mmap_reads(
-    crocksdb_options_t* opt, unsigned char v) {
+    crocksdb_options_t* opt, unsigned char v) { PrintLog(__FUNCTION__);
   opt->rep.allow_mmap_reads = v;
 }
 
 void crocksdb_options_set_allow_mmap_writes(
-    crocksdb_options_t* opt, unsigned char v) {
+    crocksdb_options_t* opt, unsigned char v) { PrintLog(__FUNCTION__);
   opt->rep.allow_mmap_writes = v;
 }
 
 void crocksdb_options_set_is_fd_close_on_exec(
-    crocksdb_options_t* opt, unsigned char v) {
+    crocksdb_options_t* opt, unsigned char v) { PrintLog(__FUNCTION__);
   opt->rep.is_fd_close_on_exec = v;
 }
 
 void crocksdb_options_set_skip_log_error_on_recovery(
-    crocksdb_options_t* opt, unsigned char v) {
+    crocksdb_options_t* opt, unsigned char v) { PrintLog(__FUNCTION__);
   opt->rep.skip_log_error_on_recovery = v;
 }
 
 void crocksdb_options_set_stats_dump_period_sec(
-    crocksdb_options_t* opt, unsigned int v) {
+    crocksdb_options_t* opt, unsigned int v) { PrintLog(__FUNCTION__);
   opt->rep.stats_dump_period_sec = v;
 }
 
 void crocksdb_options_set_advise_random_on_open(
-    crocksdb_options_t* opt, unsigned char v) {
+    crocksdb_options_t* opt, unsigned char v) { PrintLog(__FUNCTION__);
   opt->rep.advise_random_on_open = v;
 }
 
 void crocksdb_options_set_access_hint_on_compaction_start(
-    crocksdb_options_t* opt, int v) {
+    crocksdb_options_t* opt, int v) { PrintLog(__FUNCTION__);
   switch(v) {
     case 0:
       opt->rep.access_hint_on_compaction_start = rocksdb::Options::NONE;
@@ -2687,191 +2687,191 @@ void crocksdb_options_set_access_hint_on_compaction_start(
 }
 
 void crocksdb_options_set_use_adaptive_mutex(
-    crocksdb_options_t* opt, unsigned char v) {
+    crocksdb_options_t* opt, unsigned char v) { PrintLog(__FUNCTION__);
   opt->rep.use_adaptive_mutex = v;
 }
 
 void crocksdb_options_set_bytes_per_sync(
-    crocksdb_options_t* opt, uint64_t v) {
+    crocksdb_options_t* opt, uint64_t v) { PrintLog(__FUNCTION__);
   opt->rep.bytes_per_sync = v;
 }
 
 void crocksdb_options_set_enable_pipelined_write(crocksdb_options_t *opt,
-                                                 unsigned char v) {
+                                                 unsigned char v) { PrintLog(__FUNCTION__);
   opt->rep.enable_pipelined_write = v;
 }
 
 void crocksdb_options_set_enable_multi_batch_write(crocksdb_options_t *opt,
-                                                 unsigned char v) {
+                                                 unsigned char v) { PrintLog(__FUNCTION__);
   opt->rep.enable_multi_thread_write = v;
 }
 
-unsigned char crocksdb_options_is_enable_multi_batch_write(crocksdb_options_t *opt) {
+unsigned char crocksdb_options_is_enable_multi_batch_write(crocksdb_options_t *opt) { PrintLog(__FUNCTION__);
   return opt->rep.enable_multi_thread_write;
 }
 
 void crocksdb_options_set_unordered_write(crocksdb_options_t* opt,
-                                                unsigned char v) {
+                                                unsigned char v) { PrintLog(__FUNCTION__);
   opt->rep.unordered_write = v;
 }
 
 void crocksdb_options_set_allow_concurrent_memtable_write(crocksdb_options_t* opt,
-                                                         unsigned char v) {
+                                                         unsigned char v) { PrintLog(__FUNCTION__);
   opt->rep.allow_concurrent_memtable_write = v;
 }
 
-void crocksdb_options_set_manual_wal_flush(crocksdb_options_t* opt, unsigned char v) {
+void crocksdb_options_set_manual_wal_flush(crocksdb_options_t* opt, unsigned char v) { PrintLog(__FUNCTION__);
   opt->rep.manual_wal_flush = v;
 }
 
 void crocksdb_options_set_enable_write_thread_adaptive_yield(
-    crocksdb_options_t* opt, unsigned char v) {
+    crocksdb_options_t* opt, unsigned char v) { PrintLog(__FUNCTION__);
   opt->rep.enable_write_thread_adaptive_yield = v;
 }
 
 void crocksdb_options_set_max_sequential_skip_in_iterations(
-    crocksdb_options_t* opt, uint64_t v) {
+    crocksdb_options_t* opt, uint64_t v) { PrintLog(__FUNCTION__);
   opt->rep.max_sequential_skip_in_iterations = v;
 }
 
-void crocksdb_options_set_max_write_buffer_number(crocksdb_options_t* opt, int n) {
+void crocksdb_options_set_max_write_buffer_number(crocksdb_options_t* opt, int n) { PrintLog(__FUNCTION__);
   opt->rep.max_write_buffer_number = n;
 }
 
-void crocksdb_options_set_min_write_buffer_number_to_merge(crocksdb_options_t* opt, int n) {
+void crocksdb_options_set_min_write_buffer_number_to_merge(crocksdb_options_t* opt, int n) { PrintLog(__FUNCTION__);
   opt->rep.min_write_buffer_number_to_merge = n;
 }
 
 void crocksdb_options_set_max_write_buffer_number_to_maintain(
-    crocksdb_options_t* opt, int n) {
+    crocksdb_options_t* opt, int n) { PrintLog(__FUNCTION__);
   opt->rep.max_write_buffer_number_to_maintain = n;
 }
 
-void crocksdb_options_set_max_background_jobs(crocksdb_options_t* opt, int n) {
+void crocksdb_options_set_max_background_jobs(crocksdb_options_t* opt, int n) { PrintLog(__FUNCTION__);
   opt->rep.max_background_jobs = n;
 }
 
-int crocksdb_options_get_max_background_jobs(const crocksdb_options_t* opt) {
+int crocksdb_options_get_max_background_jobs(const crocksdb_options_t* opt) { PrintLog(__FUNCTION__);
   return opt->rep.max_background_jobs;
 }
 
 void crocksdb_options_set_max_background_compactions(crocksdb_options_t* opt,
-                                                     int n) {
+                                                     int n) { PrintLog(__FUNCTION__);
   opt->rep.max_background_compactions = n;
 }
 
 int crocksdb_options_get_max_background_compactions(
-    const crocksdb_options_t* opt) {
+    const crocksdb_options_t* opt) { PrintLog(__FUNCTION__);
   return opt->rep.max_background_compactions;
 }
 
 void crocksdb_options_set_max_background_flushes(crocksdb_options_t* opt,
-                                                 int n) {
+                                                 int n) { PrintLog(__FUNCTION__);
   opt->rep.max_background_flushes = n;
 }
 
-int crocksdb_options_get_max_background_flushes(const crocksdb_options_t* opt) {
+int crocksdb_options_get_max_background_flushes(const crocksdb_options_t* opt) { PrintLog(__FUNCTION__);
   return opt->rep.max_background_flushes;
 }
 
-void crocksdb_options_set_max_log_file_size(crocksdb_options_t* opt, size_t v) {
+void crocksdb_options_set_max_log_file_size(crocksdb_options_t* opt, size_t v) { PrintLog(__FUNCTION__);
   opt->rep.max_log_file_size = v;
 }
 
-void crocksdb_options_set_log_file_time_to_roll(crocksdb_options_t* opt, size_t v) {
+void crocksdb_options_set_log_file_time_to_roll(crocksdb_options_t* opt, size_t v) { PrintLog(__FUNCTION__);
   opt->rep.log_file_time_to_roll = v;
 }
 
-void crocksdb_options_set_keep_log_file_num(crocksdb_options_t* opt, size_t v) {
+void crocksdb_options_set_keep_log_file_num(crocksdb_options_t* opt, size_t v) { PrintLog(__FUNCTION__);
   opt->rep.keep_log_file_num = v;
 }
 
 void crocksdb_options_set_recycle_log_file_num(crocksdb_options_t* opt,
-                                              size_t v) {
+                                              size_t v) { PrintLog(__FUNCTION__);
   opt->rep.recycle_log_file_num = v;
 }
 
-void crocksdb_options_set_soft_rate_limit(crocksdb_options_t* opt, double v) {
+void crocksdb_options_set_soft_rate_limit(crocksdb_options_t* opt, double v) { PrintLog(__FUNCTION__);
   opt->rep.soft_rate_limit = v;
 }
 
-void crocksdb_options_set_hard_rate_limit(crocksdb_options_t* opt, double v) {
+void crocksdb_options_set_hard_rate_limit(crocksdb_options_t* opt, double v) { PrintLog(__FUNCTION__);
   opt->rep.hard_rate_limit = v;
 }
 
-void crocksdb_options_set_soft_pending_compaction_bytes_limit(crocksdb_options_t* opt, size_t v) {
+void crocksdb_options_set_soft_pending_compaction_bytes_limit(crocksdb_options_t* opt, size_t v) { PrintLog(__FUNCTION__);
   opt->rep.soft_pending_compaction_bytes_limit = v;
 }
 
-size_t crocksdb_options_get_soft_pending_compaction_bytes_limit(crocksdb_options_t* opt) {
+size_t crocksdb_options_get_soft_pending_compaction_bytes_limit(crocksdb_options_t* opt) { PrintLog(__FUNCTION__);
   return opt->rep.soft_pending_compaction_bytes_limit;
 }
 
-void crocksdb_options_set_hard_pending_compaction_bytes_limit(crocksdb_options_t* opt, size_t v) {
+void crocksdb_options_set_hard_pending_compaction_bytes_limit(crocksdb_options_t* opt, size_t v) { PrintLog(__FUNCTION__);
   opt->rep.hard_pending_compaction_bytes_limit = v;
 }
 
-size_t crocksdb_options_get_hard_pending_compaction_bytes_limit(crocksdb_options_t* opt) {
+size_t crocksdb_options_get_hard_pending_compaction_bytes_limit(crocksdb_options_t* opt) { PrintLog(__FUNCTION__);
   return opt->rep.hard_pending_compaction_bytes_limit;
 }
 
 void crocksdb_options_set_rate_limit_delay_max_milliseconds(
-    crocksdb_options_t* opt, unsigned int v) {
+    crocksdb_options_t* opt, unsigned int v) { PrintLog(__FUNCTION__);
   opt->rep.rate_limit_delay_max_milliseconds = v;
 }
 
 void crocksdb_options_set_max_manifest_file_size(
-    crocksdb_options_t* opt, size_t v) {
+    crocksdb_options_t* opt, size_t v) { PrintLog(__FUNCTION__);
   opt->rep.max_manifest_file_size = v;
 }
 
 void crocksdb_options_set_table_cache_numshardbits(
-    crocksdb_options_t* opt, int v) {
+    crocksdb_options_t* opt, int v) { PrintLog(__FUNCTION__);
   opt->rep.table_cache_numshardbits = v;
 }
 
 void crocksdb_options_set_writable_file_max_buffer_size(
-    crocksdb_options_t* opt, int v) {
+    crocksdb_options_t* opt, int v) { PrintLog(__FUNCTION__);
   opt->rep.writable_file_max_buffer_size = v;
 }
 
 void crocksdb_options_set_arena_block_size(
-    crocksdb_options_t* opt, size_t v) {
+    crocksdb_options_t* opt, size_t v) { PrintLog(__FUNCTION__);
   opt->rep.arena_block_size = v;
 }
 
-void crocksdb_options_set_disable_auto_compactions(crocksdb_options_t* opt, int disable) {
+void crocksdb_options_set_disable_auto_compactions(crocksdb_options_t* opt, int disable) { PrintLog(__FUNCTION__);
   opt->rep.disable_auto_compactions = disable;
 }
 
-int crocksdb_options_get_disable_auto_compactions(const crocksdb_options_t* opt) {
+int crocksdb_options_get_disable_auto_compactions(const crocksdb_options_t* opt) { PrintLog(__FUNCTION__);
   return opt->rep.disable_auto_compactions;
 }
 
 void crocksdb_options_set_delete_obsolete_files_period_micros(
-    crocksdb_options_t* opt, uint64_t v) {
+    crocksdb_options_t* opt, uint64_t v) { PrintLog(__FUNCTION__);
   opt->rep.delete_obsolete_files_period_micros = v;
 }
 
-void crocksdb_options_prepare_for_bulk_load(crocksdb_options_t* opt) {
+void crocksdb_options_prepare_for_bulk_load(crocksdb_options_t* opt) { PrintLog(__FUNCTION__);
   opt->rep.PrepareForBulkLoad();
 }
 
-void crocksdb_options_set_memtable_vector_rep(crocksdb_options_t *opt) {
+void crocksdb_options_set_memtable_vector_rep(crocksdb_options_t *opt) { PrintLog(__FUNCTION__);
   opt->rep.memtable_factory.reset(new rocksdb::VectorRepFactory);
 }
 
 void crocksdb_options_set_memtable_prefix_bloom_size_ratio(
-    crocksdb_options_t* opt, double v) {
+    crocksdb_options_t* opt, double v) { PrintLog(__FUNCTION__);
   opt->rep.memtable_prefix_bloom_size_ratio = v;
 }
 
 void crocksdb_options_set_memtable_huge_page_size(crocksdb_options_t* opt,
-                                                 size_t v) {
+                                                 size_t v) { PrintLog(__FUNCTION__);
   opt->rep.memtable_huge_page_size = v;
 }
 const char* crocksdb_options_get_memtable_factory_name(
-    crocksdb_options_t *opt) {
+    crocksdb_options_t *opt) { PrintLog(__FUNCTION__);
   if (!opt->rep.memtable_factory) {
      return nullptr;
   }
@@ -2880,25 +2880,25 @@ const char* crocksdb_options_get_memtable_factory_name(
 
 void crocksdb_options_set_hash_skip_list_rep(
     crocksdb_options_t *opt, size_t bucket_count,
-    int32_t skiplist_height, int32_t skiplist_branching_factor) {
+    int32_t skiplist_height, int32_t skiplist_branching_factor) { PrintLog(__FUNCTION__);
   rocksdb::MemTableRepFactory* factory = rocksdb::NewHashSkipListRepFactory(
       bucket_count, skiplist_height, skiplist_branching_factor);
   opt->rep.memtable_factory.reset(factory);
 }
 
 void crocksdb_options_set_hash_link_list_rep(
-    crocksdb_options_t *opt, size_t bucket_count) {
+    crocksdb_options_t *opt, size_t bucket_count) { PrintLog(__FUNCTION__);
   opt->rep.memtable_factory.reset(rocksdb::NewHashLinkListRepFactory(bucket_count));
 }
 
-void crocksdb_options_set_doubly_skip_list_rep(crocksdb_options_t *opt) {
+void crocksdb_options_set_doubly_skip_list_rep(crocksdb_options_t *opt) { PrintLog(__FUNCTION__);
   rocksdb::MemTableRepFactory* factory = new rocksdb::DoublySkipListFactory();
   opt->rep.memtable_factory.reset(factory);
 }
 
 void crocksdb_options_set_plain_table_factory(
     crocksdb_options_t *opt, uint32_t user_key_len, int bloom_bits_per_key,
-    double hash_table_ratio, size_t index_sparseness) {
+    double hash_table_ratio, size_t index_sparseness) { PrintLog(__FUNCTION__);
   rocksdb::PlainTableOptions options;
   options.user_key_len = user_key_len;
   options.bloom_bits_per_key = bloom_bits_per_key;
@@ -2910,64 +2910,64 @@ void crocksdb_options_set_plain_table_factory(
 }
 
 void crocksdb_options_set_max_successive_merges(
-    crocksdb_options_t* opt, size_t v) {
+    crocksdb_options_t* opt, size_t v) { PrintLog(__FUNCTION__);
   opt->rep.max_successive_merges = v;
 }
 
 void crocksdb_options_set_bloom_locality(
-    crocksdb_options_t* opt, uint32_t v) {
+    crocksdb_options_t* opt, uint32_t v) { PrintLog(__FUNCTION__);
   opt->rep.bloom_locality = v;
 }
 
 void crocksdb_options_set_inplace_update_support(
-    crocksdb_options_t* opt, unsigned char v) {
+    crocksdb_options_t* opt, unsigned char v) { PrintLog(__FUNCTION__);
   opt->rep.inplace_update_support = v;
 }
 
 void crocksdb_options_set_inplace_update_num_locks(
-    crocksdb_options_t* opt, size_t v) {
+    crocksdb_options_t* opt, size_t v) { PrintLog(__FUNCTION__);
   opt->rep.inplace_update_num_locks = v;
 }
 
 void crocksdb_options_set_report_bg_io_stats(
-    crocksdb_options_t* opt, int v) {
+    crocksdb_options_t* opt, int v) { PrintLog(__FUNCTION__);
   opt->rep.report_bg_io_stats = v;
 }
 
 void crocksdb_options_set_compaction_readahead_size(
-    crocksdb_options_t* opt, size_t v) {
+    crocksdb_options_t* opt, size_t v) { PrintLog(__FUNCTION__);
   opt->rep.compaction_readahead_size = v;
 }
 
-void crocksdb_options_set_compaction_style(crocksdb_options_t *opt, int style) {
+void crocksdb_options_set_compaction_style(crocksdb_options_t *opt, int style) { PrintLog(__FUNCTION__);
   opt->rep.compaction_style = static_cast<rocksdb::CompactionStyle>(style);
 }
 
-void crocksdb_options_set_universal_compaction_options(crocksdb_options_t *opt, crocksdb_universal_compaction_options_t *uco) {
+void crocksdb_options_set_universal_compaction_options(crocksdb_options_t *opt, crocksdb_universal_compaction_options_t *uco) { PrintLog(__FUNCTION__);
   opt->rep.compaction_options_universal = *(uco->rep);
 }
 
 void crocksdb_options_set_fifo_compaction_options(
     crocksdb_options_t* opt,
-    crocksdb_fifo_compaction_options_t* fifo) {
+    crocksdb_fifo_compaction_options_t* fifo) { PrintLog(__FUNCTION__);
   opt->rep.compaction_options_fifo = fifo->rep;
 }
 
 void crocksdb_options_set_compaction_priority(crocksdb_options_t *opt,
-                                              unsigned char priority) {
+                                              unsigned char priority) { PrintLog(__FUNCTION__);
   opt->rep.compaction_pri = static_cast<rocksdb::CompactionPri>(priority);
 }
 
-void crocksdb_options_set_delayed_write_rate(crocksdb_options_t *opt, uint64_t delayed_write_rate) {
+void crocksdb_options_set_delayed_write_rate(crocksdb_options_t *opt, uint64_t delayed_write_rate) { PrintLog(__FUNCTION__);
   opt->rep.delayed_write_rate = delayed_write_rate;
 }
 
 void crocksdb_options_set_force_consistency_checks(crocksdb_options_t *opt,
-                                                   unsigned char v) {
+                                                   unsigned char v) { PrintLog(__FUNCTION__);
   opt->rep.force_consistency_checks = v;
 }
 
-char *crocksdb_options_statistics_get_string(crocksdb_options_t *opt) {
+char *crocksdb_options_statistics_get_string(crocksdb_options_t *opt) { PrintLog(__FUNCTION__);
   if (opt->rep.statistics) {
     rocksdb::Statistics* statistics = opt->rep.statistics.get();
     return strdup(statistics->ToString().c_str());
@@ -2976,7 +2976,7 @@ char *crocksdb_options_statistics_get_string(crocksdb_options_t *opt) {
 }
 
 uint64_t crocksdb_options_statistics_get_ticker_count(crocksdb_options_t* opt,
-                                                      uint32_t ticker_type) {
+                                                      uint32_t ticker_type) { PrintLog(__FUNCTION__);
   if (opt->rep.statistics) {
     rocksdb::Statistics* statistics = opt->rep.statistics.get();
     return statistics->getTickerCount(ticker_type);
@@ -2985,7 +2985,7 @@ uint64_t crocksdb_options_statistics_get_ticker_count(crocksdb_options_t* opt,
 }
 
 uint64_t crocksdb_options_statistics_get_and_reset_ticker_count(crocksdb_options_t* opt,
-                                                                uint32_t ticker_type) {
+                                                                uint32_t ticker_type) { PrintLog(__FUNCTION__);
   if (opt->rep.statistics) {
     rocksdb::Statistics* statistics = opt->rep.statistics.get();
     return statistics->getAndResetTickerCount(ticker_type);
@@ -2994,7 +2994,7 @@ uint64_t crocksdb_options_statistics_get_and_reset_ticker_count(crocksdb_options
 }
 
 char* crocksdb_options_statistics_get_histogram_string(crocksdb_options_t* opt,
-                                                       uint32_t type) {
+                                                       uint32_t type) { PrintLog(__FUNCTION__);
   if (opt->rep.statistics) {
     rocksdb::Statistics* statistics = opt->rep.statistics.get();
     return strdup(statistics->getHistogramString(type).c_str());
@@ -3010,7 +3010,7 @@ unsigned char crocksdb_options_statistics_get_histogram(
     double* percentile99,
     double* average,
     double* standard_deviation,
-    double* max) {
+    double* max) { PrintLog(__FUNCTION__);
   if (opt->rep.statistics) {
     rocksdb::Statistics* statistics = opt->rep.statistics.get();
     crocksdb_histogramdata_t data;
@@ -3027,13 +3027,13 @@ unsigned char crocksdb_options_statistics_get_histogram(
 }
 
 void crocksdb_options_set_ratelimiter(crocksdb_options_t* opt,
-                                      crocksdb_ratelimiter_t* limiter) {
+                                      crocksdb_ratelimiter_t* limiter) { PrintLog(__FUNCTION__);
   opt->rep.rate_limiter = limiter->rep;
   limiter->rep = nullptr;
 }
 
 crocksdb_ratelimiter_t* crocksdb_options_get_ratelimiter(
-    crocksdb_options_t* opt) {
+    crocksdb_options_t* opt) { PrintLog(__FUNCTION__);
   if (opt->rep.rate_limiter != nullptr) {
     crocksdb_ratelimiter_t* limiter = new crocksdb_ratelimiter_t;
     limiter->rep = opt->rep.rate_limiter;
@@ -3043,7 +3043,7 @@ crocksdb_ratelimiter_t* crocksdb_options_get_ratelimiter(
 }
 
 void crocksdb_options_set_vector_memtable_factory(crocksdb_options_t* opt,
-                                                  uint64_t reserved_bytes) {
+                                                  uint64_t reserved_bytes) { PrintLog(__FUNCTION__);
   opt->rep.memtable_factory.reset(new VectorRepFactory(reserved_bytes));
 }
 
@@ -3051,7 +3051,7 @@ unsigned char crocksdb_load_latest_options(const char* dbpath, crocksdb_env_t* e
                                   crocksdb_options_t* db_options,
                                   crocksdb_column_family_descriptor*** cf_descs,
                                   size_t* cf_descs_len,
-                                  unsigned char ignore_unknown_options, char** errptr) {
+                                  unsigned char ignore_unknown_options, char** errptr) { PrintLog(__FUNCTION__);
   std::vector<ColumnFamilyDescriptor> tmp_cf_descs;
   Status s = rocksdb::LoadLatestOptions(dbpath, env->rep, &db_options->rep,
                                         &tmp_cf_descs, ignore_unknown_options);
@@ -3074,7 +3074,7 @@ unsigned char crocksdb_load_latest_options(const char* dbpath, crocksdb_env_t* e
 crocksdb_ratelimiter_t* crocksdb_ratelimiter_create(
     int64_t rate_bytes_per_sec,
     int64_t refill_period_us,
-    int32_t fairness) {
+    int32_t fairness) { PrintLog(__FUNCTION__);
   crocksdb_ratelimiter_t* rate_limiter = new crocksdb_ratelimiter_t;
   rate_limiter->rep = std::shared_ptr<RateLimiter>(
       NewGenericRateLimiter(rate_bytes_per_sec, refill_period_us, fairness));
@@ -3086,7 +3086,7 @@ crocksdb_ratelimiter_t* crocksdb_ratelimiter_create_with_auto_tuned(
     int64_t refill_period_us,
     int32_t fairness,
     crocksdb_ratelimiter_mode_t mode,
-    unsigned char auto_tuned) {
+    unsigned char auto_tuned) { PrintLog(__FUNCTION__);
     crocksdb_ratelimiter_t* rate_limiter = new crocksdb_ratelimiter_t;
     RateLimiter::Mode m = RateLimiter::Mode::kWritesOnly;
     switch (mode) {
@@ -3105,7 +3105,7 @@ crocksdb_ratelimiter_t* crocksdb_ratelimiter_create_with_auto_tuned(
     return rate_limiter;
 }
 
-void crocksdb_ratelimiter_destroy(crocksdb_ratelimiter_t *limiter) {
+void crocksdb_ratelimiter_destroy(crocksdb_ratelimiter_t *limiter) { PrintLog(__FUNCTION__);
   if (limiter->rep) {
     limiter->rep.reset();
   }
@@ -3113,31 +3113,31 @@ void crocksdb_ratelimiter_destroy(crocksdb_ratelimiter_t *limiter) {
 }
 
 void crocksdb_ratelimiter_set_bytes_per_second(crocksdb_ratelimiter_t *limiter,
-    int64_t rate_bytes_per_sec) {
+    int64_t rate_bytes_per_sec) { PrintLog(__FUNCTION__);
   limiter->rep->SetBytesPerSecond(rate_bytes_per_sec);
 }
 
-int64_t crocksdb_ratelimiter_get_singleburst_bytes(crocksdb_ratelimiter_t *limiter) {
+int64_t crocksdb_ratelimiter_get_singleburst_bytes(crocksdb_ratelimiter_t *limiter) { PrintLog(__FUNCTION__);
   return limiter->rep->GetSingleBurstBytes();
 }
 
 void crocksdb_ratelimiter_request(crocksdb_ratelimiter_t *limiter,
-    int64_t bytes, unsigned char pri) {
+    int64_t bytes, unsigned char pri) { PrintLog(__FUNCTION__);
   limiter->rep->Request(bytes, static_cast<Env::IOPriority>(pri), nullptr);
 }
 
 int64_t crocksdb_ratelimiter_get_total_bytes_through(
-    crocksdb_ratelimiter_t *limiter, unsigned char pri) {
+    crocksdb_ratelimiter_t *limiter, unsigned char pri) { PrintLog(__FUNCTION__);
   return limiter->rep->GetTotalBytesThrough(static_cast<Env::IOPriority>(pri));
 }
 
 int64_t crocksdb_ratelimiter_get_bytes_per_second(
-    crocksdb_ratelimiter_t *limiter) {
+    crocksdb_ratelimiter_t *limiter) { PrintLog(__FUNCTION__);
   return limiter->rep->GetBytesPerSecond();
 }
 
 int64_t crocksdb_ratelimiter_get_total_requests(
-    crocksdb_ratelimiter_t *limiter, unsigned char pri) {
+    crocksdb_ratelimiter_t *limiter, unsigned char pri) { PrintLog(__FUNCTION__);
   return limiter->rep->GetTotalRequests(static_cast<Env::IOPriority>(pri));
 }
 
@@ -3165,7 +3165,7 @@ crocksdb_compactionfilter_t* crocksdb_compactionfilter_create(
         const char* existing_value, size_t value_length,
         char** new_value, size_t *new_value_length,
         unsigned char* value_changed),
-    const char* (*name)(void*)) {
+    const char* (*name)(void*)) { PrintLog(__FUNCTION__);
   crocksdb_compactionfilter_t* result = new crocksdb_compactionfilter_t;
   result->state_ = state;
   result->destructor_ = destructor;
@@ -3177,21 +3177,21 @@ crocksdb_compactionfilter_t* crocksdb_compactionfilter_create(
 
 void crocksdb_compactionfilter_set_ignore_snapshots(
   crocksdb_compactionfilter_t* filter,
-  unsigned char whether_ignore) {
+  unsigned char whether_ignore) { PrintLog(__FUNCTION__);
   filter->ignore_snapshots_ = whether_ignore;
 }
 
-void crocksdb_compactionfilter_destroy(crocksdb_compactionfilter_t* filter) {
+void crocksdb_compactionfilter_destroy(crocksdb_compactionfilter_t* filter) { PrintLog(__FUNCTION__);
   delete filter;
 }
 
 unsigned char crocksdb_compactionfiltercontext_is_full_compaction(
-    crocksdb_compactionfiltercontext_t* context) {
+    crocksdb_compactionfiltercontext_t* context) { PrintLog(__FUNCTION__);
   return context->rep.is_full_compaction;
 }
 
 unsigned char crocksdb_compactionfiltercontext_is_manual_compaction(
-    crocksdb_compactionfiltercontext_t* context) {
+    crocksdb_compactionfiltercontext_t* context) { PrintLog(__FUNCTION__);
   return context->rep.is_manual_compaction;
 }
 
@@ -3199,7 +3199,7 @@ crocksdb_compactionfilterfactory_t* crocksdb_compactionfilterfactory_create(
     void* state, void (*destructor)(void*),
     crocksdb_compactionfilter_t* (*create_compaction_filter)(
         void*, crocksdb_compactionfiltercontext_t* context),
-    const char* (*name)(void*)) {
+    const char* (*name)(void*)) { PrintLog(__FUNCTION__);
   crocksdb_compactionfilterfactory_t* result =
       new crocksdb_compactionfilterfactory_t;
   result->state_ = state;
@@ -3210,7 +3210,7 @@ crocksdb_compactionfilterfactory_t* crocksdb_compactionfilterfactory_create(
 }
 
 void crocksdb_compactionfilterfactory_destroy(
-    crocksdb_compactionfilterfactory_t* factory) {
+    crocksdb_compactionfilterfactory_t* factory) { PrintLog(__FUNCTION__);
   delete factory;
 }
 
@@ -3221,7 +3221,7 @@ crocksdb_comparator_t* crocksdb_comparator_create(
         void*,
         const char* a, size_t alen,
         const char* b, size_t blen),
-    const char* (*name)(void*)) {
+    const char* (*name)(void*)) { PrintLog(__FUNCTION__);
   crocksdb_comparator_t* result = new crocksdb_comparator_t;
   result->state_ = state;
   result->destructor_ = destructor;
@@ -3230,7 +3230,7 @@ crocksdb_comparator_t* crocksdb_comparator_create(
   return result;
 }
 
-void crocksdb_comparator_destroy(crocksdb_comparator_t* cmp) {
+void crocksdb_comparator_destroy(crocksdb_comparator_t* cmp) { PrintLog(__FUNCTION__);
   delete cmp;
 }
 
@@ -3249,7 +3249,7 @@ crocksdb_filterpolicy_t* crocksdb_filterpolicy_create(
     void (*delete_filter)(
         void*,
         const char* filter, size_t filter_length),
-    const char* (*name)(void*)) {
+    const char* (*name)(void*)) { PrintLog(__FUNCTION__);
   crocksdb_filterpolicy_t* result = new crocksdb_filterpolicy_t;
   result->state_ = state;
   result->destructor_ = destructor;
@@ -3260,11 +3260,11 @@ crocksdb_filterpolicy_t* crocksdb_filterpolicy_create(
   return result;
 }
 
-void crocksdb_filterpolicy_destroy(crocksdb_filterpolicy_t* filter) {
+void crocksdb_filterpolicy_destroy(crocksdb_filterpolicy_t* filter) { PrintLog(__FUNCTION__);
   delete filter;
 }
 
-crocksdb_filterpolicy_t* crocksdb_filterpolicy_create_bloom_format(int bits_per_key, bool original_format) {
+crocksdb_filterpolicy_t* crocksdb_filterpolicy_create_bloom_format(int bits_per_key, bool original_format) { PrintLog(__FUNCTION__);
   // Make a crocksdb_filterpolicy_t, but override all of its methods so
   // they delegate to a NewBloomFilterPolicy() instead of user
   // supplied C functions.
@@ -3296,11 +3296,11 @@ crocksdb_filterpolicy_t* crocksdb_filterpolicy_create_bloom_format(int bits_per_
   return wrapper;
 }
 
-crocksdb_filterpolicy_t* crocksdb_filterpolicy_create_bloom_full(int bits_per_key) {
+crocksdb_filterpolicy_t* crocksdb_filterpolicy_create_bloom_full(int bits_per_key) { PrintLog(__FUNCTION__);
   return crocksdb_filterpolicy_create_bloom_format(bits_per_key, false);
 }
 
-crocksdb_filterpolicy_t* crocksdb_filterpolicy_create_bloom(int bits_per_key) {
+crocksdb_filterpolicy_t* crocksdb_filterpolicy_create_bloom(int bits_per_key) { PrintLog(__FUNCTION__);
   return crocksdb_filterpolicy_create_bloom_format(bits_per_key, true);
 }
 
@@ -3317,7 +3317,7 @@ crocksdb_mergeoperator_t* crocksdb_mergeoperator_create(
                            const size_t* operands_list_length, int num_operands,
                            unsigned char* success, size_t* new_value_length),
     void (*delete_value)(void*, const char* value, size_t value_length),
-    const char* (*name)(void*)) {
+    const char* (*name)(void*)) { PrintLog(__FUNCTION__);
   crocksdb_mergeoperator_t* result = new crocksdb_mergeoperator_t;
   result->state_ = state;
   result->destructor_ = destructor;
@@ -3328,38 +3328,38 @@ crocksdb_mergeoperator_t* crocksdb_mergeoperator_create(
   return result;
 }
 
-void crocksdb_mergeoperator_destroy(crocksdb_mergeoperator_t* merge_operator) {
+void crocksdb_mergeoperator_destroy(crocksdb_mergeoperator_t* merge_operator) { PrintLog(__FUNCTION__);
   delete merge_operator;
 }
 
-crocksdb_readoptions_t* crocksdb_readoptions_create() {
+crocksdb_readoptions_t* crocksdb_readoptions_create() { PrintLog(__FUNCTION__);
   return new crocksdb_readoptions_t;
 }
 
-void crocksdb_readoptions_destroy(crocksdb_readoptions_t* opt) {
+void crocksdb_readoptions_destroy(crocksdb_readoptions_t* opt) { PrintLog(__FUNCTION__);
   delete opt;
 }
 
 void crocksdb_readoptions_set_verify_checksums(
     crocksdb_readoptions_t* opt,
-    unsigned char v) {
+    unsigned char v) { PrintLog(__FUNCTION__);
   opt->rep.verify_checksums = v;
 }
 
 void crocksdb_readoptions_set_fill_cache(
-    crocksdb_readoptions_t* opt, unsigned char v) {
+    crocksdb_readoptions_t* opt, unsigned char v) { PrintLog(__FUNCTION__);
   opt->rep.fill_cache = v;
 }
 
 void crocksdb_readoptions_set_snapshot(
     crocksdb_readoptions_t* opt,
-    const crocksdb_snapshot_t* snap) {
+    const crocksdb_snapshot_t* snap) { PrintLog(__FUNCTION__);
   opt->rep.snapshot = (snap ? snap->rep : nullptr);
 }
 
 void crocksdb_readoptions_set_iterate_lower_bound(
   crocksdb_readoptions_t* opt,
-  const char* key, size_t keylen) {
+  const char* key, size_t keylen) { PrintLog(__FUNCTION__);
   if (key == nullptr) {
     opt->lower_bound = Slice();
     opt->rep.iterate_lower_bound = nullptr;
@@ -3371,7 +3371,7 @@ void crocksdb_readoptions_set_iterate_lower_bound(
 
 void crocksdb_readoptions_set_iterate_upper_bound(
     crocksdb_readoptions_t* opt,
-    const char* key, size_t keylen) {
+    const char* key, size_t keylen) { PrintLog(__FUNCTION__);
   if (key == nullptr) {
     opt->upper_bound = Slice();
     opt->rep.iterate_upper_bound = nullptr;
@@ -3382,52 +3382,52 @@ void crocksdb_readoptions_set_iterate_upper_bound(
 }
 
 void crocksdb_readoptions_set_read_tier(
-    crocksdb_readoptions_t* opt, int v) {
+    crocksdb_readoptions_t* opt, int v) { PrintLog(__FUNCTION__);
   opt->rep.read_tier = static_cast<rocksdb::ReadTier>(v);
 }
 
 void crocksdb_readoptions_set_tailing(
-    crocksdb_readoptions_t* opt, unsigned char v) {
+    crocksdb_readoptions_t* opt, unsigned char v) { PrintLog(__FUNCTION__);
   opt->rep.tailing = v;
 }
 
 void crocksdb_readoptions_set_managed(crocksdb_readoptions_t *opt,
-                                      unsigned char v) {
+                                      unsigned char v) { PrintLog(__FUNCTION__);
   opt->rep.managed = v;
 }
 
 void crocksdb_readoptions_set_readahead_size(
-    crocksdb_readoptions_t* opt, size_t v) {
+    crocksdb_readoptions_t* opt, size_t v) { PrintLog(__FUNCTION__);
   opt->rep.readahead_size = v;
 }
 
 void crocksdb_readoptions_set_max_skippable_internal_keys(
-    crocksdb_readoptions_t *opt, uint64_t n) {
+    crocksdb_readoptions_t *opt, uint64_t n) { PrintLog(__FUNCTION__);
   opt->rep.max_skippable_internal_keys = n;
 }
 
 void crocksdb_readoptions_set_total_order_seek(crocksdb_readoptions_t* opt,
-    unsigned char v) {
+    unsigned char v) { PrintLog(__FUNCTION__);
   opt->rep.total_order_seek = v;
 }
 
 void crocksdb_readoptions_set_prefix_same_as_start(crocksdb_readoptions_t* opt,
-    unsigned char v) {
+    unsigned char v) { PrintLog(__FUNCTION__);
   opt->rep.prefix_same_as_start = v;
 }
 
 void crocksdb_readoptions_set_pin_data(crocksdb_readoptions_t *opt,
-                                       unsigned char v) {
+                                       unsigned char v) { PrintLog(__FUNCTION__);
   opt->rep.pin_data = v;
 }
 
 void crocksdb_readoptions_set_background_purge_on_iterator_cleanup(
-    crocksdb_readoptions_t *opt, unsigned char v) {
+    crocksdb_readoptions_t *opt, unsigned char v) { PrintLog(__FUNCTION__);
   opt->rep.background_purge_on_iterator_cleanup = v;
 }
 
 void crocksdb_readoptions_set_ignore_range_deletions(
-    crocksdb_readoptions_t *opt, unsigned char v) {
+    crocksdb_readoptions_t *opt, unsigned char v) { PrintLog(__FUNCTION__);
   opt->rep.ignore_range_deletions = v;
 }
 
@@ -3469,159 +3469,159 @@ void crocksdb_readoptions_set_table_filter(
   crocksdb_readoptions_t *opt,
   void* ctx,
   int (*table_filter)(void*, const crocksdb_table_properties_t*),
-  void (*destroy)(void*)) {
+  void (*destroy)(void*)) { PrintLog(__FUNCTION__);
   opt->rep.table_filter = TableFilter(ctx, table_filter, destroy);
 }
 
-crocksdb_writeoptions_t* crocksdb_writeoptions_create() {
+crocksdb_writeoptions_t* crocksdb_writeoptions_create() { PrintLog(__FUNCTION__);
   return new crocksdb_writeoptions_t;
 }
 
-void crocksdb_writeoptions_destroy(crocksdb_writeoptions_t* opt) {
+void crocksdb_writeoptions_destroy(crocksdb_writeoptions_t* opt) { PrintLog(__FUNCTION__);
   delete opt;
 }
 
 void crocksdb_writeoptions_set_sync(
-    crocksdb_writeoptions_t* opt, unsigned char v) {
+    crocksdb_writeoptions_t* opt, unsigned char v) { PrintLog(__FUNCTION__);
   opt->rep.sync = v;
 }
 
-void crocksdb_writeoptions_disable_wal(crocksdb_writeoptions_t* opt, int disable) {
+void crocksdb_writeoptions_disable_wal(crocksdb_writeoptions_t* opt, int disable) { PrintLog(__FUNCTION__);
   opt->rep.disableWAL = disable;
 }
 
 void crocksdb_writeoptions_set_ignore_missing_column_families(
-    crocksdb_writeoptions_t *opt, unsigned char v) {
+    crocksdb_writeoptions_t *opt, unsigned char v) { PrintLog(__FUNCTION__);
   opt->rep.ignore_missing_column_families = v;
 }
 
 void crocksdb_writeoptions_set_no_slowdown(crocksdb_writeoptions_t *opt,
-                                           unsigned char v) {
+                                           unsigned char v) { PrintLog(__FUNCTION__);
   opt->rep.no_slowdown = v;
 }
 
 void crocksdb_writeoptions_set_low_pri(crocksdb_writeoptions_t *opt,
-                                       unsigned char v) {
+                                       unsigned char v) { PrintLog(__FUNCTION__);
   opt->rep.low_pri = v;
 }
 
-crocksdb_compactoptions_t* crocksdb_compactoptions_create() {
+crocksdb_compactoptions_t* crocksdb_compactoptions_create() { PrintLog(__FUNCTION__);
   return new crocksdb_compactoptions_t;
 }
 
-void crocksdb_compactoptions_destroy(crocksdb_compactoptions_t* opt) {
+void crocksdb_compactoptions_destroy(crocksdb_compactoptions_t* opt) { PrintLog(__FUNCTION__);
   delete opt;
 }
 
 void crocksdb_compactoptions_set_exclusive_manual_compaction(
-    crocksdb_compactoptions_t* opt, unsigned char v) {
+    crocksdb_compactoptions_t* opt, unsigned char v) { PrintLog(__FUNCTION__);
   opt->rep.exclusive_manual_compaction = v;
 }
 
 void crocksdb_compactoptions_set_change_level(crocksdb_compactoptions_t* opt,
-                                             unsigned char v) {
+                                             unsigned char v) { PrintLog(__FUNCTION__);
   opt->rep.change_level = v;
 }
 
 void crocksdb_compactoptions_set_target_level(crocksdb_compactoptions_t* opt,
-                                             int n) {
+                                             int n) { PrintLog(__FUNCTION__);
   opt->rep.target_level = n;
 }
 
 void crocksdb_compactoptions_set_target_path_id(crocksdb_compactoptions_t* opt,
-                                             int n) {
+                                             int n) { PrintLog(__FUNCTION__);
   opt->rep.target_path_id = n;
 }
 
 void crocksdb_compactoptions_set_max_subcompactions(
     crocksdb_compactoptions_t* opt,
-    int v) {
+    int v) { PrintLog(__FUNCTION__);
   opt->rep.max_subcompactions = v;
 }
 
 void crocksdb_compactoptions_set_bottommost_level_compaction(
     crocksdb_compactoptions_t* opt,
-    int v) {
+    int v) { PrintLog(__FUNCTION__);
   opt->rep.bottommost_level_compaction = static_cast<BottommostLevelCompaction>(v);
 }
 
-crocksdb_flushoptions_t* crocksdb_flushoptions_create() {
+crocksdb_flushoptions_t* crocksdb_flushoptions_create() { PrintLog(__FUNCTION__);
   return new crocksdb_flushoptions_t;
 }
 
-void crocksdb_flushoptions_destroy(crocksdb_flushoptions_t* opt) {
+void crocksdb_flushoptions_destroy(crocksdb_flushoptions_t* opt) { PrintLog(__FUNCTION__);
   delete opt;
 }
 
 void crocksdb_flushoptions_set_wait(
-    crocksdb_flushoptions_t* opt, unsigned char v) {
+    crocksdb_flushoptions_t* opt, unsigned char v) { PrintLog(__FUNCTION__);
   opt->rep.wait = v;
 }
 
 void crocksdb_flushoptions_set_allow_write_stall(
-    crocksdb_flushoptions_t* opt, unsigned char v) {
+    crocksdb_flushoptions_t* opt, unsigned char v) { PrintLog(__FUNCTION__);
   opt->rep.allow_write_stall = v;
 }
 
-crocksdb_memory_allocator_t* crocksdb_jemalloc_nodump_allocator_create(char** errptr) {
+crocksdb_memory_allocator_t* crocksdb_jemalloc_nodump_allocator_create(char** errptr) { PrintLog(__FUNCTION__);
   crocksdb_memory_allocator_t* allocator = new crocksdb_memory_allocator_t;
   rocksdb::JemallocAllocatorOptions options;
   SaveError(errptr, rocksdb::NewJemallocNodumpAllocator(options, &allocator->rep));
   return allocator;
 }
 
-void crocksdb_memory_allocator_destroy(crocksdb_memory_allocator_t* allocator) {
+void crocksdb_memory_allocator_destroy(crocksdb_memory_allocator_t* allocator) { PrintLog(__FUNCTION__);
   delete allocator;
 }
 
-crocksdb_lru_cache_options_t* crocksdb_lru_cache_options_create() {
+crocksdb_lru_cache_options_t* crocksdb_lru_cache_options_create() { PrintLog(__FUNCTION__);
   return new crocksdb_lru_cache_options_t;
 }
 
-void crocksdb_lru_cache_options_destroy(crocksdb_lru_cache_options_t* opt) {
+void crocksdb_lru_cache_options_destroy(crocksdb_lru_cache_options_t* opt) { PrintLog(__FUNCTION__);
   delete opt;
 }
 
 void crocksdb_lru_cache_options_set_capacity(
-    crocksdb_lru_cache_options_t* opt, size_t capacity) {
+    crocksdb_lru_cache_options_t* opt, size_t capacity) { PrintLog(__FUNCTION__);
   opt->rep.capacity = capacity;
 }
 
 void crocksdb_lru_cache_options_set_num_shard_bits(
-    crocksdb_lru_cache_options_t* opt, int num_shard_bits) {
+    crocksdb_lru_cache_options_t* opt, int num_shard_bits) { PrintLog(__FUNCTION__);
   opt->rep.num_shard_bits = num_shard_bits;
 }
 
 void crocksdb_lru_cache_options_set_strict_capacity_limit(
-    crocksdb_lru_cache_options_t* opt, unsigned char strict_capacity_limit) {
+    crocksdb_lru_cache_options_t* opt, unsigned char strict_capacity_limit) { PrintLog(__FUNCTION__);
   opt->rep.strict_capacity_limit = strict_capacity_limit;
 }
 
 void crocksdb_lru_cache_options_set_high_pri_pool_ratio(
-    crocksdb_lru_cache_options_t* opt, double high_pri_pool_ratio) {
+    crocksdb_lru_cache_options_t* opt, double high_pri_pool_ratio) { PrintLog(__FUNCTION__);
   opt->rep.high_pri_pool_ratio = high_pri_pool_ratio;
 }
 
 void crocksdb_lru_cache_options_set_memory_allocator(
-    crocksdb_lru_cache_options_t* opt, crocksdb_memory_allocator_t* allocator) {
+    crocksdb_lru_cache_options_t* opt, crocksdb_memory_allocator_t* allocator) { PrintLog(__FUNCTION__);
     opt->rep.memory_allocator = allocator->rep;
 }
 
-crocksdb_cache_t* crocksdb_cache_create_lru(crocksdb_lru_cache_options_t* opt) {
+crocksdb_cache_t* crocksdb_cache_create_lru(crocksdb_lru_cache_options_t* opt) { PrintLog(__FUNCTION__);
   crocksdb_cache_t* c = new crocksdb_cache_t;
   c->rep = NewLRUCache(opt->rep);
   return c;
 }
 
-void crocksdb_cache_destroy(crocksdb_cache_t* cache) {
+void crocksdb_cache_destroy(crocksdb_cache_t* cache) { PrintLog(__FUNCTION__);
   delete cache;
 }
 
-void crocksdb_cache_set_capacity(crocksdb_cache_t* cache, size_t capacity) {
+void crocksdb_cache_set_capacity(crocksdb_cache_t* cache, size_t capacity) { PrintLog(__FUNCTION__);
   cache->rep->SetCapacity(capacity);
 }
 
-crocksdb_env_t* crocksdb_default_env_create() {
+crocksdb_env_t* crocksdb_default_env_create() { PrintLog(__FUNCTION__);
   crocksdb_env_t* result = new crocksdb_env_t;
   result->rep = Env::Default();
   result->block_cipher = nullptr;
@@ -3630,7 +3630,7 @@ crocksdb_env_t* crocksdb_default_env_create() {
   return result;
 }
 
-crocksdb_env_t* crocksdb_mem_env_create() {
+crocksdb_env_t* crocksdb_mem_env_create() { PrintLog(__FUNCTION__);
   crocksdb_env_t* result = new crocksdb_env_t;
   result->rep = rocksdb::NewMemEnv(Env::Default());
   result->block_cipher = nullptr;
@@ -3668,7 +3668,7 @@ struct CTRBlockCipher : public BlockCipher {
 
 crocksdb_env_t*
 crocksdb_ctr_encrypted_env_create(crocksdb_env_t* base_env,
-    const char* ciphertext, size_t ciphertext_len) {
+    const char* ciphertext, size_t ciphertext_len) { PrintLog(__FUNCTION__);
   auto result = new crocksdb_env_t;
   result->block_cipher = new CTRBlockCipher(
       ciphertext_len, std::string(ciphertext, ciphertext_len));
@@ -3680,43 +3680,43 @@ crocksdb_ctr_encrypted_env_create(crocksdb_env_t* base_env,
   return result;
 }
 
-void crocksdb_env_set_background_threads(crocksdb_env_t* env, int n) {
+void crocksdb_env_set_background_threads(crocksdb_env_t* env, int n) { PrintLog(__FUNCTION__);
   env->rep->SetBackgroundThreads(n);
 }
 
-void crocksdb_env_set_high_priority_background_threads(crocksdb_env_t* env, int n) {
+void crocksdb_env_set_high_priority_background_threads(crocksdb_env_t* env, int n) { PrintLog(__FUNCTION__);
   env->rep->SetBackgroundThreads(n, Env::HIGH);
 }
 
-void crocksdb_env_join_all_threads(crocksdb_env_t* env) {
+void crocksdb_env_join_all_threads(crocksdb_env_t* env) { PrintLog(__FUNCTION__);
   env->rep->WaitForJoin();
 }
 
-void crocksdb_env_file_exists(crocksdb_env_t* env, const char* path, char** errptr) {
+void crocksdb_env_file_exists(crocksdb_env_t* env, const char* path, char** errptr) { PrintLog(__FUNCTION__);
   SaveError(errptr, env->rep->FileExists(path));
 }
 
-void crocksdb_env_delete_file(crocksdb_env_t* env, const char* path, char** errptr) {
+void crocksdb_env_delete_file(crocksdb_env_t* env, const char* path, char** errptr) { PrintLog(__FUNCTION__);
   SaveError(errptr, env->rep->DeleteFile(path));
 }
 
-void crocksdb_env_destroy(crocksdb_env_t* env) {
+void crocksdb_env_destroy(crocksdb_env_t* env) { PrintLog(__FUNCTION__);
   if (!env->is_default) delete env->rep;
   if (env->block_cipher) delete env->block_cipher;
   if (env->encryption_provider) delete env->encryption_provider;
   delete env;
 }
 
-crocksdb_envoptions_t* crocksdb_envoptions_create() {
+crocksdb_envoptions_t* crocksdb_envoptions_create() { PrintLog(__FUNCTION__);
   crocksdb_envoptions_t* opt = new crocksdb_envoptions_t;
   return opt;
 }
 
-void crocksdb_envoptions_destroy(crocksdb_envoptions_t* opt) { delete opt; }
+void crocksdb_envoptions_destroy(crocksdb_envoptions_t* opt) { PrintLog(__FUNCTION__); delete opt; }
 
 crocksdb_sequential_file_t* crocksdb_sequential_file_create(
     crocksdb_env_t* env, const char* path,
-    const crocksdb_envoptions_t* opts, char **errptr) {
+    const crocksdb_envoptions_t* opts, char **errptr) { PrintLog(__FUNCTION__);
   std::unique_ptr<SequentialFile> result;
   if (SaveError(errptr, env->rep->NewSequentialFile(path, &result, opts->rep))) {
     return nullptr;
@@ -3727,7 +3727,7 @@ crocksdb_sequential_file_t* crocksdb_sequential_file_create(
 }
 
 size_t crocksdb_sequential_file_read(crocksdb_sequential_file_t* file,
-    size_t n, char* buf, char** errptr) {
+    size_t n, char* buf, char** errptr) { PrintLog(__FUNCTION__);
   Slice result;
   if (SaveError(errptr, file->rep->Read(n, &result, buf))) {
       return 0;
@@ -3736,30 +3736,30 @@ size_t crocksdb_sequential_file_read(crocksdb_sequential_file_t* file,
 }
 
 void crocksdb_sequential_file_skip(crocksdb_sequential_file_t* file,
-    size_t n, char** errptr) {
+    size_t n, char** errptr) { PrintLog(__FUNCTION__);
   SaveError(errptr, file->rep->Skip(n));
 }
 
-void crocksdb_sequential_file_destroy(crocksdb_sequential_file_t* file) {
+void crocksdb_sequential_file_destroy(crocksdb_sequential_file_t* file) { PrintLog(__FUNCTION__);
   delete file->rep;
   delete file;
 }
 
 #ifdef OPENSSL
-crocksdb_file_encryption_info_t* crocksdb_file_encryption_info_create() {
+crocksdb_file_encryption_info_t* crocksdb_file_encryption_info_create() { PrintLog(__FUNCTION__);
   crocksdb_file_encryption_info_t* file_info = new crocksdb_file_encryption_info_t;
   file_info->rep = new FileEncryptionInfo;
   return file_info;
 }
 
 void crocksdb_file_encryption_info_destroy(
-    crocksdb_file_encryption_info_t* file_info) {
+    crocksdb_file_encryption_info_t* file_info) { PrintLog(__FUNCTION__);
   delete file_info->rep;
   delete file_info;
 }
 
 crocksdb_encryption_method_t crocksdb_file_encryption_info_method(
-    crocksdb_file_encryption_info_t* file_info) {
+    crocksdb_file_encryption_info_t* file_info) { PrintLog(__FUNCTION__);
   assert(file_info != nullptr);
   assert(file_info->rep != nullptr);
   switch (file_info->rep->method) {
@@ -3779,7 +3779,7 @@ crocksdb_encryption_method_t crocksdb_file_encryption_info_method(
 }
 
 const char* crocksdb_file_encryption_info_key(
-    crocksdb_file_encryption_info_t* file_info, size_t* keylen) {
+    crocksdb_file_encryption_info_t* file_info, size_t* keylen) { PrintLog(__FUNCTION__);
   assert(file_info != nullptr);
   assert(file_info->rep != nullptr);
   assert(keylen != nullptr);
@@ -3788,7 +3788,7 @@ const char* crocksdb_file_encryption_info_key(
 }
 
 const char* crocksdb_file_encryption_info_iv(
-    crocksdb_file_encryption_info_t* file_info, size_t* ivlen) {
+    crocksdb_file_encryption_info_t* file_info, size_t* ivlen) { PrintLog(__FUNCTION__);
   assert(file_info != nullptr);
   assert(file_info->rep != nullptr);
   assert(ivlen != nullptr);
@@ -3797,7 +3797,7 @@ const char* crocksdb_file_encryption_info_iv(
 }
 
 void crocksdb_file_encryption_info_set_method(
-    crocksdb_file_encryption_info_t* file_info, crocksdb_encryption_method_t method) {
+    crocksdb_file_encryption_info_t* file_info, crocksdb_encryption_method_t method) { PrintLog(__FUNCTION__);
   assert(file_info != nullptr);
   switch (method) {
     case kUnknown:
@@ -3821,13 +3821,13 @@ void crocksdb_file_encryption_info_set_method(
 }
 
 void crocksdb_file_encryption_info_set_key(
-    crocksdb_file_encryption_info_t* file_info, const char* key, size_t keylen) {
+    crocksdb_file_encryption_info_t* file_info, const char* key, size_t keylen) { PrintLog(__FUNCTION__);
   assert(file_info != nullptr);
   file_info->rep->key = std::string(key, keylen);
 }
 
 void crocksdb_file_encryption_info_set_iv(
-    crocksdb_file_encryption_info_t* file_info, const char* iv, size_t ivlen) {
+    crocksdb_file_encryption_info_t* file_info, const char* iv, size_t ivlen) { PrintLog(__FUNCTION__);
   assert(file_info != nullptr);
   file_info->rep->iv = std::string(iv, ivlen);
 }
@@ -3845,7 +3845,7 @@ struct crocksdb_encryption_key_manager_impl_t : public KeyManager {
   }
 
   Status GetFile(
-      const std::string& fname, FileEncryptionInfo* file_info) override {
+      const std::string& fname, FileEncryptionInfo* file_info) override { PrintLog(__FUNCTION__);
     crocksdb_file_encryption_info_t info;
     info.rep = file_info;
     const char* ret = get_file(state, fname.c_str(), &info);
@@ -3858,7 +3858,7 @@ struct crocksdb_encryption_key_manager_impl_t : public KeyManager {
   }
   
   Status NewFile(
-      const std::string& fname, FileEncryptionInfo* file_info) override {
+      const std::string& fname, FileEncryptionInfo* file_info) override { PrintLog(__FUNCTION__);
     crocksdb_file_encryption_info_t info;
     info.rep = file_info;
     const char* ret = new_file(state, fname.c_str(), &info);
@@ -3870,7 +3870,7 @@ struct crocksdb_encryption_key_manager_impl_t : public KeyManager {
     return s;
   }
   
-  Status DeleteFile(const std::string& fname) override {
+  Status DeleteFile(const std::string& fname) override { PrintLog(__FUNCTION__);
     const char* ret = delete_file(state, fname.c_str());
     Status s;
     if (ret != nullptr) {
@@ -3881,7 +3881,7 @@ struct crocksdb_encryption_key_manager_impl_t : public KeyManager {
   }
 
   Status LinkFile(
-      const std::string& src_fname, const std::string& dst_fname) override {
+      const std::string& src_fname, const std::string& dst_fname) override { PrintLog(__FUNCTION__);
     const char* ret = link_file(state, src_fname.c_str(), dst_fname.c_str());
     Status s;
     if (ret != nullptr) {
@@ -3897,7 +3897,7 @@ crocksdb_encryption_key_manager_t* crocksdb_encryption_key_manager_create(
     crocksdb_encryption_key_manager_get_file_cb get_file,
     crocksdb_encryption_key_manager_new_file_cb new_file,
     crocksdb_encryption_key_manager_delete_file_cb delete_file,
-    crocksdb_encryption_key_manager_link_file_cb link_file) {
+    crocksdb_encryption_key_manager_link_file_cb link_file) { PrintLog(__FUNCTION__);
   std::shared_ptr<crocksdb_encryption_key_manager_impl_t> key_manager_impl =
       std::make_shared<crocksdb_encryption_key_manager_impl_t>();
   key_manager_impl->state = state;
@@ -3912,14 +3912,14 @@ crocksdb_encryption_key_manager_t* crocksdb_encryption_key_manager_create(
   return key_manager;
 }
 
-void crocksdb_encryption_key_manager_destroy(crocksdb_encryption_key_manager_t* key_manager) {
+void crocksdb_encryption_key_manager_destroy(crocksdb_encryption_key_manager_t* key_manager) { PrintLog(__FUNCTION__);
   delete key_manager;
 }
 
 
 const char* crocksdb_encryption_key_manager_get_file(
     crocksdb_encryption_key_manager_t* key_manager, const char* fname,
-    crocksdb_file_encryption_info_t* file_info) {
+    crocksdb_file_encryption_info_t* file_info) { PrintLog(__FUNCTION__);
   assert(key_manager != nullptr && key_manager->rep != nullptr);
   assert(fname != nullptr);
   assert(file_info != nullptr && file_info->rep != nullptr);
@@ -3932,7 +3932,7 @@ const char* crocksdb_encryption_key_manager_get_file(
 
 const char* crocksdb_encryption_key_manager_new_file(
     crocksdb_encryption_key_manager_t* key_manager, const char* fname,
-    crocksdb_file_encryption_info_t* file_info) {
+    crocksdb_file_encryption_info_t* file_info) { PrintLog(__FUNCTION__);
   assert(key_manager != nullptr && key_manager->rep != nullptr);
   assert(fname != nullptr);
   assert(file_info != nullptr && file_info->rep != nullptr);
@@ -3944,7 +3944,7 @@ const char* crocksdb_encryption_key_manager_new_file(
 }
 
 const char* crocksdb_encryption_key_manager_delete_file(
-    crocksdb_encryption_key_manager_t* key_manager, const char* fname) {
+    crocksdb_encryption_key_manager_t* key_manager, const char* fname) { PrintLog(__FUNCTION__);
   assert(key_manager != nullptr && key_manager->rep != nullptr);
   assert(fname != nullptr);
   Status s = key_manager->rep->DeleteFile(fname);
@@ -3956,7 +3956,7 @@ const char* crocksdb_encryption_key_manager_delete_file(
 
 const char* crocksdb_encryption_key_manager_link_file(
     crocksdb_encryption_key_manager_t* key_manager, const char* src_fname,
-    const char* dst_fname) {
+    const char* dst_fname) { PrintLog(__FUNCTION__);
   assert(key_manager != nullptr && key_manager->rep != nullptr);
   assert(src_fname != nullptr);
   assert(dst_fname != nullptr);
@@ -3968,7 +3968,7 @@ const char* crocksdb_encryption_key_manager_link_file(
 }
 
 crocksdb_env_t* crocksdb_key_managed_encrypted_env_create(
-    crocksdb_env_t* base_env, crocksdb_encryption_key_manager_t* key_manager) {
+    crocksdb_env_t* base_env, crocksdb_encryption_key_manager_t* key_manager) { PrintLog(__FUNCTION__);
   assert(base_env != nullptr);
   assert(key_manager != nullptr);
   crocksdb_env_t* result = new crocksdb_env_t;
@@ -3981,19 +3981,19 @@ crocksdb_env_t* crocksdb_key_managed_encrypted_env_create(
 #endif
 
 crocksdb_sstfilereader_t* crocksdb_sstfilereader_create(
-    const crocksdb_options_t* io_options) {
+    const crocksdb_options_t* io_options) { PrintLog(__FUNCTION__);
   auto reader = new crocksdb_sstfilereader_t;
   reader->rep = new SstFileReader(io_options->rep);
   return reader;
 }
 
 void crocksdb_sstfilereader_open(crocksdb_sstfilereader_t* reader,
-                                 const char* name, char** errptr) {
+                                 const char* name, char** errptr) { PrintLog(__FUNCTION__);
   SaveError(errptr, reader->rep->Open(std::string(name)));
 }
 
 crocksdb_iterator_t* crocksdb_sstfilereader_new_iterator(
-    crocksdb_sstfilereader_t* reader, const crocksdb_readoptions_t* options) {
+    crocksdb_sstfilereader_t* reader, const crocksdb_readoptions_t* options) { PrintLog(__FUNCTION__);
   auto it = new crocksdb_iterator_t;
   it->rep = reader->rep->NewIterator(options->rep);
   return it;
@@ -4001,23 +4001,23 @@ crocksdb_iterator_t* crocksdb_sstfilereader_new_iterator(
 
 void crocksdb_sstfilereader_read_table_properties(
     const crocksdb_sstfilereader_t* reader,
-    void* ctx, void (*cb)(void*, const crocksdb_table_properties_t*)) {
+    void* ctx, void (*cb)(void*, const crocksdb_table_properties_t*)) { PrintLog(__FUNCTION__);
   auto props = reader->rep->GetTableProperties();
   cb(ctx, reinterpret_cast<const crocksdb_table_properties_t*>(props.get()));
 }
 
 void crocksdb_sstfilereader_verify_checksum(crocksdb_sstfilereader_t* reader,
-                                            char** errptr) {
+                                            char** errptr) { PrintLog(__FUNCTION__);
   SaveError(errptr, reader->rep->VerifyChecksum());
 }
 
-void crocksdb_sstfilereader_destroy(crocksdb_sstfilereader_t* reader) {
+void crocksdb_sstfilereader_destroy(crocksdb_sstfilereader_t* reader) { PrintLog(__FUNCTION__);
   delete reader->rep;
   delete reader;
 }
 
 crocksdb_sstfilewriter_t* crocksdb_sstfilewriter_create(
-    const crocksdb_envoptions_t* env, const crocksdb_options_t* io_options) {
+    const crocksdb_envoptions_t* env, const crocksdb_options_t* io_options) { PrintLog(__FUNCTION__);
   crocksdb_sstfilewriter_t* writer = new crocksdb_sstfilewriter_t;
   writer->rep = new SstFileWriter(env->rep, io_options->rep);
   return writer;
@@ -4025,7 +4025,7 @@ crocksdb_sstfilewriter_t* crocksdb_sstfilewriter_create(
 
 crocksdb_sstfilewriter_t* crocksdb_sstfilewriter_create_cf(
     const crocksdb_envoptions_t* env, const crocksdb_options_t* io_options,
-    crocksdb_column_family_handle_t* column_family) {
+    crocksdb_column_family_handle_t* column_family) { PrintLog(__FUNCTION__);
   crocksdb_sstfilewriter_t* writer = new crocksdb_sstfilewriter_t;
   writer->rep =
       new SstFileWriter(env->rep, io_options->rep, column_family->rep);
@@ -4033,131 +4033,131 @@ crocksdb_sstfilewriter_t* crocksdb_sstfilewriter_create_cf(
 }
 
 void crocksdb_sstfilewriter_open(crocksdb_sstfilewriter_t* writer,
-                                const char* name, char** errptr) {
+                                const char* name, char** errptr) { PrintLog(__FUNCTION__);
   SaveError(errptr, writer->rep->Open(std::string(name)));
 }
 
 void crocksdb_sstfilewriter_put(crocksdb_sstfilewriter_t *writer,
                                 const char *key, size_t keylen, const char *val,
-                                size_t vallen, char **errptr) {
+                                size_t vallen, char **errptr) { PrintLog(__FUNCTION__);
   SaveError(errptr, writer->rep->Put(Slice(key, keylen), Slice(val, vallen)));
 }
 
 void crocksdb_sstfilewriter_merge(crocksdb_sstfilewriter_t *writer,
                                   const char *key, size_t keylen,
                                   const char *val, size_t vallen,
-                                  char **errptr) {
+                                  char **errptr) { PrintLog(__FUNCTION__);
   SaveError(errptr, writer->rep->Merge(Slice(key, keylen), Slice(val, vallen)));
 }
 
 void crocksdb_sstfilewriter_delete(crocksdb_sstfilewriter_t *writer,
                                    const char *key, size_t keylen,
-                                   char **errptr) {
+                                   char **errptr) { PrintLog(__FUNCTION__);
   SaveError(errptr, writer->rep->Delete(Slice(key, keylen)));
 }
 
 void crocksdb_sstfilewriter_delete_range(crocksdb_sstfilewriter_t *writer,
                                          const char *begin_key, size_t begin_keylen,
                                          const char *end_key, size_t end_keylen,
-                                         char **errptr) {
+                                         char **errptr) { PrintLog(__FUNCTION__);
   SaveError(errptr, writer->rep->DeleteRange(Slice(begin_key, begin_keylen),
                                              Slice(end_key, end_keylen)));
 }
 
 void crocksdb_sstfilewriter_finish(crocksdb_sstfilewriter_t* writer,
                                    crocksdb_externalsstfileinfo_t* info,
-                                   char** errptr) {
+                                   char** errptr) { PrintLog(__FUNCTION__);
   SaveError(errptr, writer->rep->Finish(&info->rep));
 }
 
-uint64_t crocksdb_sstfilewriter_file_size(crocksdb_sstfilewriter_t* writer) {
+uint64_t crocksdb_sstfilewriter_file_size(crocksdb_sstfilewriter_t* writer) { PrintLog(__FUNCTION__);
     return writer->rep->FileSize();
 }
 
-void crocksdb_sstfilewriter_destroy(crocksdb_sstfilewriter_t* writer) {
+void crocksdb_sstfilewriter_destroy(crocksdb_sstfilewriter_t* writer) { PrintLog(__FUNCTION__);
   delete writer->rep;
   delete writer;
 }
 
-crocksdb_externalsstfileinfo_t* crocksdb_externalsstfileinfo_create() {
+crocksdb_externalsstfileinfo_t* crocksdb_externalsstfileinfo_create() { PrintLog(__FUNCTION__);
   return new crocksdb_externalsstfileinfo_t;
 };
 
-void crocksdb_externalsstfileinfo_destroy(crocksdb_externalsstfileinfo_t* info) {
+void crocksdb_externalsstfileinfo_destroy(crocksdb_externalsstfileinfo_t* info) { PrintLog(__FUNCTION__);
   delete info;
 }
 
 const char* crocksdb_externalsstfileinfo_file_path(
-    crocksdb_externalsstfileinfo_t* info, size_t* size) {
+    crocksdb_externalsstfileinfo_t* info, size_t* size) { PrintLog(__FUNCTION__);
   *size = info->rep.file_path.size();
   return info->rep.file_path.c_str();
 }
 
 const char* crocksdb_externalsstfileinfo_smallest_key(
-    crocksdb_externalsstfileinfo_t* info, size_t* size) {
+    crocksdb_externalsstfileinfo_t* info, size_t* size) { PrintLog(__FUNCTION__);
   *size = info->rep.smallest_key.size();
   return info->rep.smallest_key.c_str();
 }
 
 const char* crocksdb_externalsstfileinfo_largest_key(
-    crocksdb_externalsstfileinfo_t* info, size_t* size) {
+    crocksdb_externalsstfileinfo_t* info, size_t* size) { PrintLog(__FUNCTION__);
   *size = info->rep.largest_key.size();
   return info->rep.largest_key.c_str();
 }
 
 uint64_t crocksdb_externalsstfileinfo_sequence_number(
-    crocksdb_externalsstfileinfo_t* info) {
+    crocksdb_externalsstfileinfo_t* info) { PrintLog(__FUNCTION__);
   return info->rep.sequence_number;
 }
 
 uint64_t crocksdb_externalsstfileinfo_file_size(
-    crocksdb_externalsstfileinfo_t* info) {
+    crocksdb_externalsstfileinfo_t* info) { PrintLog(__FUNCTION__);
   return info->rep.file_size;
 }
 
 uint64_t crocksdb_externalsstfileinfo_num_entries(
-    crocksdb_externalsstfileinfo_t* info) {
+    crocksdb_externalsstfileinfo_t* info) { PrintLog(__FUNCTION__);
   return info->rep.num_entries;
 }
 
 crocksdb_ingestexternalfileoptions_t*
-crocksdb_ingestexternalfileoptions_create() {
+crocksdb_ingestexternalfileoptions_create() { PrintLog(__FUNCTION__);
   crocksdb_ingestexternalfileoptions_t* opt =
       new crocksdb_ingestexternalfileoptions_t;
   return opt;
 }
 
 void crocksdb_ingestexternalfileoptions_set_move_files(
-    crocksdb_ingestexternalfileoptions_t* opt, unsigned char move_files) {
+    crocksdb_ingestexternalfileoptions_t* opt, unsigned char move_files) { PrintLog(__FUNCTION__);
   opt->rep.move_files = move_files;
 }
 
 void crocksdb_ingestexternalfileoptions_set_snapshot_consistency(
     crocksdb_ingestexternalfileoptions_t* opt,
-    unsigned char snapshot_consistency) {
+    unsigned char snapshot_consistency) { PrintLog(__FUNCTION__);
   opt->rep.snapshot_consistency = snapshot_consistency;
 }
 
 void crocksdb_ingestexternalfileoptions_set_allow_global_seqno(
     crocksdb_ingestexternalfileoptions_t* opt,
-    unsigned char allow_global_seqno) {
+    unsigned char allow_global_seqno) { PrintLog(__FUNCTION__);
   opt->rep.allow_global_seqno = allow_global_seqno;
 }
 
 void crocksdb_ingestexternalfileoptions_set_allow_blocking_flush(
     crocksdb_ingestexternalfileoptions_t* opt,
-    unsigned char allow_blocking_flush) {
+    unsigned char allow_blocking_flush) { PrintLog(__FUNCTION__);
   opt->rep.allow_blocking_flush = allow_blocking_flush;
 }
 
 void crocksdb_ingestexternalfileoptions_destroy(
-    crocksdb_ingestexternalfileoptions_t* opt) {
+    crocksdb_ingestexternalfileoptions_t* opt) { PrintLog(__FUNCTION__);
   delete opt;
 }
 
 void crocksdb_ingest_external_file(
     crocksdb_t* db, const char* const* file_list, const size_t list_len,
-    const crocksdb_ingestexternalfileoptions_t* opt, char** errptr) {
+    const crocksdb_ingestexternalfileoptions_t* opt, char** errptr) { PrintLog(__FUNCTION__);
   std::vector<std::string> files(list_len);
   for (size_t i = 0; i < list_len; ++i) {
     files[i] = std::string(file_list[i]);
@@ -4168,7 +4168,7 @@ void crocksdb_ingest_external_file(
 void crocksdb_ingest_external_file_cf(
     crocksdb_t* db, crocksdb_column_family_handle_t* handle,
     const char* const* file_list, const size_t list_len,
-    const crocksdb_ingestexternalfileoptions_t* opt, char** errptr) {
+    const crocksdb_ingestexternalfileoptions_t* opt, char** errptr) { PrintLog(__FUNCTION__);
   std::vector<std::string> files(list_len);
   for (size_t i = 0; i < list_len; ++i) {
     files[i] = std::string(file_list[i]);
@@ -4179,7 +4179,7 @@ void crocksdb_ingest_external_file_cf(
 unsigned char crocksdb_ingest_external_file_optimized(
     crocksdb_t* db, crocksdb_column_family_handle_t* handle,
     const char* const* file_list, const size_t list_len,
-    const crocksdb_ingestexternalfileoptions_t* opt, char** errptr) {
+    const crocksdb_ingestexternalfileoptions_t* opt, char** errptr) { PrintLog(__FUNCTION__);
   std::vector<std::string> files(list_len);
   for (size_t i = 0; i < list_len; ++i) {
     files[i] = std::string(file_list[i]);
@@ -4227,7 +4227,7 @@ crocksdb_slicetransform_t* crocksdb_slicetransform_create(
     unsigned char (*in_range)(
         void*,
         const char* key, size_t length),
-    const char* (*name)(void*)) {
+    const char* (*name)(void*)) { PrintLog(__FUNCTION__);
   crocksdb_slicetransform_t* result = new crocksdb_slicetransform_t;
   result->state_ = state;
   result->destructor_ = destructor;
@@ -4238,11 +4238,11 @@ crocksdb_slicetransform_t* crocksdb_slicetransform_create(
   return result;
 }
 
-void crocksdb_slicetransform_destroy(crocksdb_slicetransform_t* st) {
+void crocksdb_slicetransform_destroy(crocksdb_slicetransform_t* st) { PrintLog(__FUNCTION__);
   delete st;
 }
 
-crocksdb_slicetransform_t* crocksdb_slicetransform_create_fixed_prefix(size_t prefixLen) {
+crocksdb_slicetransform_t* crocksdb_slicetransform_create_fixed_prefix(size_t prefixLen) { PrintLog(__FUNCTION__);
   struct Wrapper : public crocksdb_slicetransform_t {
     const SliceTransform* rep_;
     ~Wrapper() { delete rep_; }
@@ -4263,7 +4263,7 @@ crocksdb_slicetransform_t* crocksdb_slicetransform_create_fixed_prefix(size_t pr
   return wrapper;
 }
 
-crocksdb_slicetransform_t* crocksdb_slicetransform_create_noop() {
+crocksdb_slicetransform_t* crocksdb_slicetransform_create_noop() { PrintLog(__FUNCTION__);
   struct Wrapper : public crocksdb_slicetransform_t {
     const SliceTransform* rep_;
     ~Wrapper() { delete rep_; }
@@ -4284,70 +4284,70 @@ crocksdb_slicetransform_t* crocksdb_slicetransform_create_noop() {
   return wrapper;
 }
 
-crocksdb_universal_compaction_options_t* crocksdb_universal_compaction_options_create() {
+crocksdb_universal_compaction_options_t* crocksdb_universal_compaction_options_create() { PrintLog(__FUNCTION__);
   crocksdb_universal_compaction_options_t* result = new crocksdb_universal_compaction_options_t;
   result->rep = new rocksdb::CompactionOptionsUniversal;
   return result;
 }
 
 void crocksdb_universal_compaction_options_set_size_ratio(
-  crocksdb_universal_compaction_options_t* uco, int ratio) {
+  crocksdb_universal_compaction_options_t* uco, int ratio) { PrintLog(__FUNCTION__);
   uco->rep->size_ratio = ratio;
 }
 
 void crocksdb_universal_compaction_options_set_min_merge_width(
-  crocksdb_universal_compaction_options_t* uco, int w) {
+  crocksdb_universal_compaction_options_t* uco, int w) { PrintLog(__FUNCTION__);
   uco->rep->min_merge_width = w;
 }
 
 void crocksdb_universal_compaction_options_set_max_merge_width(
-  crocksdb_universal_compaction_options_t* uco, int w) {
+  crocksdb_universal_compaction_options_t* uco, int w) { PrintLog(__FUNCTION__);
   uco->rep->max_merge_width = w;
 }
 
 void crocksdb_universal_compaction_options_set_max_size_amplification_percent(
-  crocksdb_universal_compaction_options_t* uco, int p) {
+  crocksdb_universal_compaction_options_t* uco, int p) { PrintLog(__FUNCTION__);
   uco->rep->max_size_amplification_percent = p;
 }
 
 void crocksdb_universal_compaction_options_set_compression_size_percent(
-  crocksdb_universal_compaction_options_t* uco, int p) {
+  crocksdb_universal_compaction_options_t* uco, int p) { PrintLog(__FUNCTION__);
   uco->rep->compression_size_percent = p;
 }
 
 void crocksdb_universal_compaction_options_set_stop_style(
-  crocksdb_universal_compaction_options_t* uco, int style) {
+  crocksdb_universal_compaction_options_t* uco, int style) { PrintLog(__FUNCTION__);
   uco->rep->stop_style = static_cast<rocksdb::CompactionStopStyle>(style);
 }
 
 void crocksdb_universal_compaction_options_destroy(
-  crocksdb_universal_compaction_options_t* uco) {
+  crocksdb_universal_compaction_options_t* uco) { PrintLog(__FUNCTION__);
   delete uco->rep;
   delete uco;
 }
 
-crocksdb_fifo_compaction_options_t* crocksdb_fifo_compaction_options_create() {
+crocksdb_fifo_compaction_options_t* crocksdb_fifo_compaction_options_create() { PrintLog(__FUNCTION__);
   crocksdb_fifo_compaction_options_t* result = new crocksdb_fifo_compaction_options_t;
   result->rep =  CompactionOptionsFIFO();
   return result;
 }
 
 void crocksdb_fifo_compaction_options_set_max_table_files_size(
-    crocksdb_fifo_compaction_options_t* fifo_opts, uint64_t size) {
+    crocksdb_fifo_compaction_options_t* fifo_opts, uint64_t size) { PrintLog(__FUNCTION__);
   fifo_opts->rep.max_table_files_size = size;
 }
 
 void crocksdb_fifo_compaction_options_set_allow_compaction(
-    crocksdb_fifo_compaction_options_t* fifo_opts, unsigned char allow_compaction) {
+    crocksdb_fifo_compaction_options_t* fifo_opts, unsigned char allow_compaction) { PrintLog(__FUNCTION__);
   fifo_opts->rep.allow_compaction = allow_compaction;
 }
 
 void crocksdb_fifo_compaction_options_destroy(
-    crocksdb_fifo_compaction_options_t* fifo_opts) {
+    crocksdb_fifo_compaction_options_t* fifo_opts) { PrintLog(__FUNCTION__);
   delete fifo_opts;
 }
 
-void crocksdb_options_set_min_level_to_compress(crocksdb_options_t* opt, int level) {
+void crocksdb_options_set_min_level_to_compress(crocksdb_options_t* opt, int level) { PrintLog(__FUNCTION__);
   if (level >= 0) {
     assert(level <= opt->rep.num_levels);
     opt->rep.compression_per_level.resize(opt->rep.num_levels);
@@ -4361,32 +4361,32 @@ void crocksdb_options_set_min_level_to_compress(crocksdb_options_t* opt, int lev
 }
 
 int crocksdb_livefiles_count(
-  const crocksdb_livefiles_t* lf) {
+  const crocksdb_livefiles_t* lf) { PrintLog(__FUNCTION__);
   return static_cast<int>(lf->rep.size());
 }
 
 const char* crocksdb_livefiles_name(
   const crocksdb_livefiles_t* lf,
-  int index) {
+  int index) { PrintLog(__FUNCTION__);
   return lf->rep[index].name.c_str();
 }
 
 int crocksdb_livefiles_level(
   const crocksdb_livefiles_t* lf,
-  int index) {
+  int index) { PrintLog(__FUNCTION__);
   return lf->rep[index].level;
 }
 
 size_t crocksdb_livefiles_size(
   const crocksdb_livefiles_t* lf,
-  int index) {
+  int index) { PrintLog(__FUNCTION__);
   return lf->rep[index].size;
 }
 
 const char* crocksdb_livefiles_smallestkey(
   const crocksdb_livefiles_t* lf,
   int index,
-  size_t* size) {
+  size_t* size) { PrintLog(__FUNCTION__);
   *size = lf->rep[index].smallestkey.size();
   return lf->rep[index].smallestkey.data();
 }
@@ -4394,20 +4394,20 @@ const char* crocksdb_livefiles_smallestkey(
 const char* crocksdb_livefiles_largestkey(
   const crocksdb_livefiles_t* lf,
   int index,
-  size_t* size) {
+  size_t* size) { PrintLog(__FUNCTION__);
   *size = lf->rep[index].largestkey.size();
   return lf->rep[index].largestkey.data();
 }
 
 extern void crocksdb_livefiles_destroy(
-  const crocksdb_livefiles_t* lf) {
+  const crocksdb_livefiles_t* lf) { PrintLog(__FUNCTION__);
   delete lf;
 }
 
 void crocksdb_get_options_from_string(const crocksdb_options_t* base_options,
                                      const char* opts_str,
                                      crocksdb_options_t* new_options,
-                                     char** errptr) {
+                                     char** errptr) { PrintLog(__FUNCTION__);
   SaveError(errptr,
             GetOptionsFromString(base_options->rep, std::string(opts_str),
                                  &new_options->rep));
@@ -4417,7 +4417,7 @@ void crocksdb_delete_files_in_range(
     crocksdb_t* db,
     const char* start_key, size_t start_key_len,
     const char* limit_key, size_t limit_key_len,
-    unsigned char include_end, char** errptr) {
+    unsigned char include_end, char** errptr) { PrintLog(__FUNCTION__);
   Slice a, b;
   SaveError(
       errptr,
@@ -4432,7 +4432,7 @@ void crocksdb_delete_files_in_range_cf(
     crocksdb_t* db, crocksdb_column_family_handle_t* column_family,
     const char* start_key, size_t start_key_len,
     const char* limit_key, size_t limit_key_len,
-    unsigned char include_end, char** errptr) {
+    unsigned char include_end, char** errptr) { PrintLog(__FUNCTION__);
   Slice a, b;
   SaveError(
       errptr,
@@ -4447,7 +4447,7 @@ void crocksdb_delete_files_in_ranges_cf(
     crocksdb_t* db, crocksdb_column_family_handle_t* cf,
     const char* const* start_keys, const size_t* start_keys_lens,
     const char* const* limit_keys, const size_t* limit_keys_lens,
-    size_t num_ranges, unsigned char include_end, char** errptr) {
+    size_t num_ranges, unsigned char include_end, char** errptr) { PrintLog(__FUNCTION__);
   std::vector<Slice> starts(num_ranges);
   std::vector<Slice> limits(num_ranges);
   std::vector<RangePtr> ranges(num_ranges);
@@ -4470,11 +4470,11 @@ void crocksdb_delete_files_in_ranges_cf(
           db->rep, cf->rep, &ranges[0], num_ranges, include_end));
 }
 
-void crocksdb_free(void* ptr) { free(ptr); }
+void crocksdb_free(void* ptr) { PrintLog(__FUNCTION__); free(ptr); }
 
 crocksdb_logger_t *crocksdb_create_log_from_options(const char *path,
                                                     crocksdb_options_t *opts,
-                                                    char **errptr) {
+                                                    char **errptr) { PrintLog(__FUNCTION__);
   crocksdb_logger_t *logger = new crocksdb_logger_t;
   if (SaveError(errptr, CreateLoggerFromOptions(std::string(path), opts->rep,
                                                 &logger->rep))) {
@@ -4485,11 +4485,11 @@ crocksdb_logger_t *crocksdb_create_log_from_options(const char *path,
   return logger;
 }
 
-void crocksdb_log_destroy(crocksdb_logger_t *logger) { delete logger; }
+void crocksdb_log_destroy(crocksdb_logger_t *logger) { PrintLog(__FUNCTION__); delete logger; }
 
 crocksdb_pinnableslice_t* crocksdb_get_pinned(
     crocksdb_t* db, const crocksdb_readoptions_t* options, const char* key,
-    size_t keylen, char** errptr) {
+    size_t keylen, char** errptr) { PrintLog(__FUNCTION__);
   crocksdb_pinnableslice_t* v = new (crocksdb_pinnableslice_t);
   Status s = db->rep->Get(options->rep, db->rep->DefaultColumnFamily(),
                           Slice(key, keylen), &v->rep);
@@ -4506,7 +4506,7 @@ crocksdb_pinnableslice_t* crocksdb_get_pinned(
 crocksdb_pinnableslice_t* crocksdb_get_pinned_cf(
     crocksdb_t* db, const crocksdb_readoptions_t* options,
     crocksdb_column_family_handle_t* column_family, const char* key,
-    size_t keylen, char** errptr) {
+    size_t keylen, char** errptr) { PrintLog(__FUNCTION__);
   crocksdb_pinnableslice_t* v = new (crocksdb_pinnableslice_t);
   Status s = db->rep->Get(options->rep, column_family->rep, Slice(key, keylen),
                           &v->rep);
@@ -4520,20 +4520,20 @@ crocksdb_pinnableslice_t* crocksdb_get_pinned_cf(
   return v;
 }
 
-void crocksdb_pinnableslice_destroy(crocksdb_pinnableslice_t* v) { delete v; }
+void crocksdb_pinnableslice_destroy(crocksdb_pinnableslice_t* v) { PrintLog(__FUNCTION__); delete v; }
 
 const char* crocksdb_pinnableslice_value(const crocksdb_pinnableslice_t* v,
-                                        size_t* vlen) {
+                                        size_t* vlen) { PrintLog(__FUNCTION__);
   // v can't be null.
   *vlen = v->rep.size();
   return v->rep.data();
 }
 
-size_t crocksdb_get_supported_compression_number() {
+size_t crocksdb_get_supported_compression_number() { PrintLog(__FUNCTION__);
   return rocksdb::GetSupportedCompressions().size();
 }
 
-void crocksdb_get_supported_compression(int* v, size_t l) {
+void crocksdb_get_supported_compression(int* v, size_t l) { PrintLog(__FUNCTION__);
   auto compressions = rocksdb::GetSupportedCompressions();
   assert(compressions.size() == l);
   for (size_t i = 0; i < compressions.size(); i++) {
@@ -4550,8 +4550,7 @@ struct crocksdb_user_collected_properties_t {
 void crocksdb_user_collected_properties_add(
   crocksdb_user_collected_properties_t* props,
   const char* k, size_t klen,
-  const char* v, size_t vlen) {
-  PrintLog(__FUNCTION__);
+  const char* v, size_t vlen) { PrintLog(__FUNCTION__);
   props->rep.emplace(
       std::make_pair(std::string(k, klen), std::string(v, vlen)));
 }
@@ -4664,14 +4663,14 @@ const char* crocksdb_table_properties_get_str(
 
 const crocksdb_user_collected_properties_t*
 crocksdb_table_properties_get_user_properties(
-    const crocksdb_table_properties_t* props) {
+    const crocksdb_table_properties_t* props) { PrintLog(__FUNCTION__);
   return reinterpret_cast<const crocksdb_user_collected_properties_t*>(
       &props->rep.user_collected_properties);
 }
 
 const char* crocksdb_user_collected_properties_get(
     const crocksdb_user_collected_properties_t* props, const char* key,
-    size_t klen, size_t* vlen) {
+    size_t klen, size_t* vlen) { PrintLog(__FUNCTION__);
   auto val = props->rep.find(std::string(key, klen));
   if (val == props->rep.end()) {
     return nullptr;
@@ -4681,7 +4680,7 @@ const char* crocksdb_user_collected_properties_get(
 }
 
 size_t crocksdb_user_collected_properties_len(
-    const crocksdb_user_collected_properties_t* props) {
+    const crocksdb_user_collected_properties_t* props) { PrintLog(__FUNCTION__);
   return props->rep.size();
 }
 
@@ -4775,7 +4774,7 @@ struct crocksdb_table_properties_collector_t : public TablePropertiesCollector {
                             const Slice& value,
                             EntryType entry_type,
                             SequenceNumber seq,
-                            uint64_t file_size) override {
+                            uint64_t file_size) override { PrintLog(__FUNCTION__);
     add_(state_,
          key.data(), key.size(),
          value.data(), value.size(),
@@ -4783,18 +4782,18 @@ struct crocksdb_table_properties_collector_t : public TablePropertiesCollector {
     return Status::OK();
   }
 
-  virtual Status Finish(UserCollectedProperties* rep) override {
+  virtual Status Finish(UserCollectedProperties* rep) override { PrintLog(__FUNCTION__);
     finish_(state_,
             reinterpret_cast<crocksdb_user_collected_properties_t*>(rep));
     return Status::OK();
   }
 
-  virtual UserCollectedProperties GetReadableProperties() const override {
+  virtual UserCollectedProperties GetReadableProperties() const override { PrintLog(__FUNCTION__);
     // Seems rocksdb will not return the readable properties and we don't need them too.
     return UserCollectedProperties();
   }
 
-  const char* Name() const override {
+  const char* Name() const override { PrintLog(__FUNCTION__);
     return name_(state_);
   }
 };
@@ -4864,7 +4863,7 @@ crocksdb_table_properties_collector_factory_create(
 }
 
 void crocksdb_table_properties_collector_factory_destroy(
-  crocksdb_table_properties_collector_factory_t* f) {
+  crocksdb_table_properties_collector_factory_t* f) { PrintLog(__FUNCTION__);
   delete f;
 }
 
@@ -4951,26 +4950,26 @@ crocksdb_get_all_key_versions(crocksdb_t *db, const char *begin_key,
   return result;
 }
 
-size_t crocksdb_keyversions_count(const crocksdb_keyversions_t *kvs) {
+size_t crocksdb_keyversions_count(const crocksdb_keyversions_t *kvs) { PrintLog(__FUNCTION__);
   return kvs->rep.size();
 }
 
 const char *crocksdb_keyversions_key(const crocksdb_keyversions_t *kvs,
-                                     int index) {
+                                     int index) { PrintLog(__FUNCTION__);
   return kvs->rep[index].user_key.c_str();
 }
 
 const char *crocksdb_keyversions_value(const crocksdb_keyversions_t *kvs,
-                                       int index) {
+                                       int index) { PrintLog(__FUNCTION__);
   return kvs->rep[index].value.c_str();
 }
 
 uint64_t crocksdb_keyversions_seq(const crocksdb_keyversions_t *kvs,
-                                  int index) {
+                                  int index) { PrintLog(__FUNCTION__);
   return kvs->rep[index].sequence;
 }
 
-int crocksdb_keyversions_type(const crocksdb_keyversions_t *kvs, int index) {
+int crocksdb_keyversions_type(const crocksdb_keyversions_t *kvs, int index) { PrintLog(__FUNCTION__);
   return kvs->rep[index].type;
 }
 
@@ -5135,49 +5134,49 @@ const crocksdb_sst_file_meta_data_t* crocksdb_level_meta_data_file_data(
   return reinterpret_cast<const crocksdb_sst_file_meta_data_t*>(&meta->rep.files[n]);
 }
 
-size_t crocksdb_sst_file_meta_data_size(const crocksdb_sst_file_meta_data_t* meta) {
+size_t crocksdb_sst_file_meta_data_size(const crocksdb_sst_file_meta_data_t* meta) { PrintLog(__FUNCTION__);
   return meta->rep.size;
 }
 
-const char* crocksdb_sst_file_meta_data_name(const crocksdb_sst_file_meta_data_t* meta) {
+const char* crocksdb_sst_file_meta_data_name(const crocksdb_sst_file_meta_data_t* meta) { PrintLog(__FUNCTION__);
   return meta->rep.name.data();
 }
 
 const char* crocksdb_sst_file_meta_data_smallestkey(
-    const crocksdb_sst_file_meta_data_t* meta, size_t* len) {
+    const crocksdb_sst_file_meta_data_t* meta, size_t* len) { PrintLog(__FUNCTION__);
   *len = meta->rep.smallestkey.size();
   return meta->rep.smallestkey.data();
 }
 
 const char* crocksdb_sst_file_meta_data_largestkey(
-    const crocksdb_sst_file_meta_data_t* meta, size_t* len) {
+    const crocksdb_sst_file_meta_data_t* meta, size_t* len) { PrintLog(__FUNCTION__);
   *len = meta->rep.largestkey.size();
   return meta->rep.largestkey.data();
 }
 
-crocksdb_compaction_options_t* crocksdb_compaction_options_create() {
+crocksdb_compaction_options_t* crocksdb_compaction_options_create() { PrintLog(__FUNCTION__);
   return new crocksdb_compaction_options_t();
 }
 
-void crocksdb_compaction_options_destroy(crocksdb_compaction_options_t* opts) {
+void crocksdb_compaction_options_destroy(crocksdb_compaction_options_t* opts) { PrintLog(__FUNCTION__);
   delete opts;
 }
 
 void crocksdb_compaction_options_set_compression(
     crocksdb_compaction_options_t* opts,
-    int compression) {
+    int compression) { PrintLog(__FUNCTION__);
   opts->rep.compression = static_cast<CompressionType>(compression);
 }
 
 void crocksdb_compaction_options_set_output_file_size_limit(
     crocksdb_compaction_options_t* opts,
-    size_t size) {
+    size_t size) { PrintLog(__FUNCTION__);
   opts->rep.output_file_size_limit = size;
 }
 
 void crocksdb_compaction_options_set_max_subcompactions(
     crocksdb_compaction_options_t* opts,
-    int v) {
+    int v) { PrintLog(__FUNCTION__);
   opts->rep.max_subcompactions = v;
 }
 
@@ -5187,7 +5186,7 @@ void crocksdb_compact_files_cf(
    const char** input_file_names,
    size_t input_file_count,
    int output_level,
-   char** errptr) {
+   char** errptr) { PrintLog(__FUNCTION__);
   std::vector<std::string> input_files;
   for (size_t i = 0; i < input_file_count; i++) {
     input_files.push_back(input_file_names[i]);
@@ -5198,11 +5197,11 @@ void crocksdb_compact_files_cf(
 
 /* PerfContext */
 
-int crocksdb_get_perf_level(void) {
+int crocksdb_get_perf_level(void) { PrintLog(__FUNCTION__);
   return static_cast<int>(rocksdb::GetPerfLevel());
 }
 
-void crocksdb_set_perf_level(int level) {
+void crocksdb_set_perf_level(int level) { PrintLog(__FUNCTION__);
   rocksdb::SetPerfLevel(static_cast<PerfLevel>(level));
 }
 
@@ -5210,291 +5209,291 @@ struct crocksdb_perf_context_t {
   PerfContext rep;
 };
 
-crocksdb_perf_context_t* crocksdb_get_perf_context(void) {
+crocksdb_perf_context_t* crocksdb_get_perf_context(void) { PrintLog(__FUNCTION__);
   return reinterpret_cast<crocksdb_perf_context_t*>(rocksdb::get_perf_context());
 }
 
-void crocksdb_perf_context_reset(crocksdb_perf_context_t* ctx) {
+void crocksdb_perf_context_reset(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   ctx->rep.Reset();
 }
 
-uint64_t crocksdb_perf_context_user_key_comparison_count(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_user_key_comparison_count(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.user_key_comparison_count;
 }
 
-uint64_t crocksdb_perf_context_block_cache_hit_count(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_block_cache_hit_count(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.block_cache_hit_count;
 }
 
-uint64_t crocksdb_perf_context_block_read_count(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_block_read_count(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.block_read_count;
 }
 
-uint64_t crocksdb_perf_context_block_read_byte(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_block_read_byte(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.block_read_byte;
 }
 
-uint64_t crocksdb_perf_context_block_read_time(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_block_read_time(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.block_read_time;
 }
 
-uint64_t crocksdb_perf_context_block_checksum_time(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_block_checksum_time(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.block_checksum_time;
 }
 
-uint64_t crocksdb_perf_context_block_decompress_time(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_block_decompress_time(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.block_decompress_time;
 }
 
-uint64_t crocksdb_perf_context_get_read_bytes(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_get_read_bytes(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.get_read_bytes;
 }
 
-uint64_t crocksdb_perf_context_multiget_read_bytes(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_multiget_read_bytes(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.multiget_read_bytes;
 }
 
-uint64_t crocksdb_perf_context_iter_read_bytes(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_iter_read_bytes(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.iter_read_bytes;
 }
 
-uint64_t crocksdb_perf_context_internal_key_skipped_count(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_internal_key_skipped_count(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.internal_key_skipped_count;
 }
 
-uint64_t crocksdb_perf_context_internal_delete_skipped_count(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_internal_delete_skipped_count(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.internal_delete_skipped_count;
 }
 
-uint64_t crocksdb_perf_context_internal_recent_skipped_count(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_internal_recent_skipped_count(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.internal_recent_skipped_count;
 }
 
-uint64_t crocksdb_perf_context_internal_merge_count(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_internal_merge_count(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.internal_merge_count;
 }
 
-uint64_t crocksdb_perf_context_get_snapshot_time(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_get_snapshot_time(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.get_snapshot_time;
 }
 
-uint64_t crocksdb_perf_context_get_from_memtable_time(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_get_from_memtable_time(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.get_from_memtable_time;
 }
 
-uint64_t crocksdb_perf_context_get_from_memtable_count(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_get_from_memtable_count(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.get_from_memtable_count;
 }
 
-uint64_t crocksdb_perf_context_get_post_process_time(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_get_post_process_time(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.get_post_process_time;
 }
 
-uint64_t crocksdb_perf_context_get_from_output_files_time(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_get_from_output_files_time(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.get_from_output_files_time;
 }
 
-uint64_t crocksdb_perf_context_seek_on_memtable_time(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_seek_on_memtable_time(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.seek_on_memtable_time;
 }
 
-uint64_t crocksdb_perf_context_seek_on_memtable_count(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_seek_on_memtable_count(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.seek_on_memtable_count;
 }
 
-uint64_t crocksdb_perf_context_next_on_memtable_count(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_next_on_memtable_count(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.next_on_memtable_count;
 }
 
-uint64_t crocksdb_perf_context_prev_on_memtable_count(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_prev_on_memtable_count(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.prev_on_memtable_count;
 }
 
-uint64_t crocksdb_perf_context_seek_child_seek_time(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_seek_child_seek_time(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.seek_child_seek_time;
 }
 
-uint64_t crocksdb_perf_context_seek_child_seek_count(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_seek_child_seek_count(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.seek_child_seek_count;
 }
 
-uint64_t crocksdb_perf_context_seek_min_heap_time(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_seek_min_heap_time(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.seek_min_heap_time;
 }
 
-uint64_t crocksdb_perf_context_seek_max_heap_time(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_seek_max_heap_time(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.seek_max_heap_time;
 }
 
-uint64_t crocksdb_perf_context_seek_internal_seek_time(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_seek_internal_seek_time(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.seek_internal_seek_time;
 }
 
-uint64_t crocksdb_perf_context_find_next_user_entry_time(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_find_next_user_entry_time(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.find_next_user_entry_time;
 }
 
-uint64_t crocksdb_perf_context_write_wal_time(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_write_wal_time(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.write_wal_time;
 }
 
-uint64_t crocksdb_perf_context_write_memtable_time(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_write_memtable_time(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.write_memtable_time;
 }
 
-uint64_t crocksdb_perf_context_write_delay_time(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_write_delay_time(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.write_delay_time;
 }
 
-uint64_t crocksdb_perf_context_write_pre_and_post_process_time(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_write_pre_and_post_process_time(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.write_pre_and_post_process_time;
 }
 
-uint64_t crocksdb_perf_context_db_mutex_lock_nanos(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_db_mutex_lock_nanos(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.db_mutex_lock_nanos;
 }
 
-uint64_t crocksdb_perf_context_write_thread_wait_nanos(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_write_thread_wait_nanos(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.write_thread_wait_nanos;
 }
 
-uint64_t crocksdb_perf_context_write_scheduling_flushes_compactions_time(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_write_scheduling_flushes_compactions_time(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.write_scheduling_flushes_compactions_time;
 }
 
-uint64_t crocksdb_perf_context_db_condition_wait_nanos(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_db_condition_wait_nanos(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.db_condition_wait_nanos;
 }
 
-uint64_t crocksdb_perf_context_merge_operator_time_nanos(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_merge_operator_time_nanos(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.merge_operator_time_nanos;
 }
 
-uint64_t crocksdb_perf_context_read_index_block_nanos(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_read_index_block_nanos(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.read_index_block_nanos;
 }
 
-uint64_t crocksdb_perf_context_read_filter_block_nanos(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_read_filter_block_nanos(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.read_filter_block_nanos;
 }
 
-uint64_t crocksdb_perf_context_new_table_block_iter_nanos(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_new_table_block_iter_nanos(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.new_table_block_iter_nanos;
 }
 
-uint64_t crocksdb_perf_context_new_table_iterator_nanos(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_new_table_iterator_nanos(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.new_table_iterator_nanos;
 }
 
-uint64_t crocksdb_perf_context_block_seek_nanos(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_block_seek_nanos(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.block_seek_nanos;
 }
 
-uint64_t crocksdb_perf_context_find_table_nanos(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_find_table_nanos(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.find_table_nanos;
 }
 
-uint64_t crocksdb_perf_context_bloom_memtable_hit_count(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_bloom_memtable_hit_count(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.bloom_memtable_hit_count;
 }
 
-uint64_t crocksdb_perf_context_bloom_memtable_miss_count(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_bloom_memtable_miss_count(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.bloom_memtable_miss_count;
 }
 
-uint64_t crocksdb_perf_context_bloom_sst_hit_count(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_bloom_sst_hit_count(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.bloom_sst_hit_count;
 }
 
-uint64_t crocksdb_perf_context_bloom_sst_miss_count(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_bloom_sst_miss_count(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.bloom_sst_miss_count;
 }
 
-uint64_t crocksdb_perf_context_env_new_sequential_file_nanos(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_env_new_sequential_file_nanos(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.env_new_sequential_file_nanos;
 }
 
-uint64_t crocksdb_perf_context_env_new_random_access_file_nanos(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_env_new_random_access_file_nanos(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.env_new_random_access_file_nanos;
 }
 
-uint64_t crocksdb_perf_context_env_new_writable_file_nanos(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_env_new_writable_file_nanos(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.env_new_writable_file_nanos;
 }
 
-uint64_t crocksdb_perf_context_env_reuse_writable_file_nanos(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_env_reuse_writable_file_nanos(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.env_reuse_writable_file_nanos;
 }
 
-uint64_t crocksdb_perf_context_env_new_random_rw_file_nanos(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_env_new_random_rw_file_nanos(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.env_new_random_rw_file_nanos;
 }
 
-uint64_t crocksdb_perf_context_env_new_directory_nanos(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_env_new_directory_nanos(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.env_new_directory_nanos;
 }
 
-uint64_t crocksdb_perf_context_env_file_exists_nanos(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_env_file_exists_nanos(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.env_file_exists_nanos;
 }
 
-uint64_t crocksdb_perf_context_env_get_children_nanos(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_env_get_children_nanos(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.env_get_children_nanos;
 }
 
-uint64_t crocksdb_perf_context_env_get_children_file_attributes_nanos(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_env_get_children_file_attributes_nanos(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.env_get_children_file_attributes_nanos;
 }
 
-uint64_t crocksdb_perf_context_env_delete_file_nanos(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_env_delete_file_nanos(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.env_delete_file_nanos;
 }
 
-uint64_t crocksdb_perf_context_env_create_dir_nanos(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_env_create_dir_nanos(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.env_create_dir_nanos;
 }
 
-uint64_t crocksdb_perf_context_env_create_dir_if_missing_nanos(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_env_create_dir_if_missing_nanos(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.env_create_dir_if_missing_nanos;
 }
 
-uint64_t crocksdb_perf_context_env_delete_dir_nanos(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_env_delete_dir_nanos(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.env_delete_dir_nanos;
 }
 
-uint64_t crocksdb_perf_context_env_get_file_size_nanos(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_env_get_file_size_nanos(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.env_get_file_size_nanos;
 }
 
-uint64_t crocksdb_perf_context_env_get_file_modification_time_nanos(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_env_get_file_modification_time_nanos(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.env_get_file_modification_time_nanos;
 }
 
-uint64_t crocksdb_perf_context_env_rename_file_nanos(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_env_rename_file_nanos(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.env_rename_file_nanos;
 }
 
-uint64_t crocksdb_perf_context_env_link_file_nanos(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_env_link_file_nanos(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.env_link_file_nanos;
 }
 
-uint64_t crocksdb_perf_context_env_lock_file_nanos(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_env_lock_file_nanos(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.env_lock_file_nanos;
 }
 
-uint64_t crocksdb_perf_context_env_unlock_file_nanos(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_env_unlock_file_nanos(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.env_unlock_file_nanos;
 }
 
-uint64_t crocksdb_perf_context_env_new_logger_nanos(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_env_new_logger_nanos(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.env_new_logger_nanos;
 }
 
-uint64_t crocksdb_perf_context_encrypt_data_nanos(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_encrypt_data_nanos(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.encrypt_data_nanos;
 }
 
-uint64_t crocksdb_perf_context_decrypt_data_nanos(crocksdb_perf_context_t* ctx) {
+uint64_t crocksdb_perf_context_decrypt_data_nanos(crocksdb_perf_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.decrypt_data_nanos;
 }
 
@@ -5504,55 +5503,55 @@ struct crocksdb_iostats_context_t {
   IOStatsContext rep;
 };
 
-crocksdb_iostats_context_t* crocksdb_get_iostats_context(void) {
+crocksdb_iostats_context_t* crocksdb_get_iostats_context(void) { PrintLog(__FUNCTION__);
   return reinterpret_cast<crocksdb_iostats_context_t*>(rocksdb::get_iostats_context());
 }
 
-void crocksdb_iostats_context_reset(crocksdb_iostats_context_t* ctx) {
+void crocksdb_iostats_context_reset(crocksdb_iostats_context_t* ctx) { PrintLog(__FUNCTION__);
   ctx->rep.Reset();
 }
 
-uint64_t crocksdb_iostats_context_bytes_written(crocksdb_iostats_context_t* ctx) {
+uint64_t crocksdb_iostats_context_bytes_written(crocksdb_iostats_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.bytes_written;
 }
 
-uint64_t crocksdb_iostats_context_bytes_read(crocksdb_iostats_context_t* ctx) {
+uint64_t crocksdb_iostats_context_bytes_read(crocksdb_iostats_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.bytes_read;
 }
 
-uint64_t crocksdb_iostats_context_open_nanos(crocksdb_iostats_context_t* ctx) {
+uint64_t crocksdb_iostats_context_open_nanos(crocksdb_iostats_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.open_nanos;
 }
 
-uint64_t crocksdb_iostats_context_allocate_nanos(crocksdb_iostats_context_t* ctx) {
+uint64_t crocksdb_iostats_context_allocate_nanos(crocksdb_iostats_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.allocate_nanos;
 }
 
-uint64_t crocksdb_iostats_context_write_nanos(crocksdb_iostats_context_t* ctx) {
+uint64_t crocksdb_iostats_context_write_nanos(crocksdb_iostats_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.write_nanos;
 }
 
-uint64_t crocksdb_iostats_context_read_nanos(crocksdb_iostats_context_t* ctx) {
+uint64_t crocksdb_iostats_context_read_nanos(crocksdb_iostats_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.read_nanos;
 }
 
-uint64_t crocksdb_iostats_context_range_sync_nanos(crocksdb_iostats_context_t* ctx) {
+uint64_t crocksdb_iostats_context_range_sync_nanos(crocksdb_iostats_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.range_sync_nanos;
 }
 
-uint64_t crocksdb_iostats_context_fsync_nanos(crocksdb_iostats_context_t* ctx) {
+uint64_t crocksdb_iostats_context_fsync_nanos(crocksdb_iostats_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.fsync_nanos;
 }
 
-uint64_t crocksdb_iostats_context_prepare_write_nanos(crocksdb_iostats_context_t* ctx) {
+uint64_t crocksdb_iostats_context_prepare_write_nanos(crocksdb_iostats_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.prepare_write_nanos;
 }
 
-uint64_t crocksdb_iostats_context_logger_nanos(crocksdb_iostats_context_t* ctx) {
+uint64_t crocksdb_iostats_context_logger_nanos(crocksdb_iostats_context_t* ctx) { PrintLog(__FUNCTION__);
   return ctx->rep.logger_nanos;
 }
 
-void crocksdb_run_ldb_tool(int argc, char** argv, const crocksdb_options_t* opts) {
+void crocksdb_run_ldb_tool(int argc, char** argv, const crocksdb_options_t* opts) { PrintLog(__FUNCTION__);
   LDBTool().Run(argc, argv, opts->rep);
 }
 
@@ -5566,7 +5565,7 @@ crocksdb_t* ctitandb_open_column_families(
     const ctitandb_options_t* tdb_options, int num_column_families,
     const char** column_family_names,
     const ctitandb_options_t** titan_column_family_options,
-    crocksdb_column_family_handle_t** column_family_handles, char** errptr) {
+    crocksdb_column_family_handle_t** column_family_handles, char** errptr) { PrintLog(__FUNCTION__);
   std::vector<TitanCFDescriptor> column_families;
   for (int i = 0; i < num_column_families; i++) {
     column_families.push_back(
@@ -5599,7 +5598,7 @@ crocksdb_column_family_handle_t* ctitandb_create_column_family(
     crocksdb_t* db,
     const ctitandb_options_t* titan_column_family_options,
     const char* column_family_name,
-    char** errptr) {
+    char** errptr) { PrintLog(__FUNCTION__);
   // Blindly cast db into TitanDB.
   TitanDB* titan_db = reinterpret_cast<TitanDB*>(db->rep);
   crocksdb_column_family_handle_t* handle = new crocksdb_column_family_handle_t;
@@ -5613,71 +5612,71 @@ crocksdb_column_family_handle_t* ctitandb_create_column_family(
 
 /* TitanDBOptions */
 
-ctitandb_options_t* ctitandb_options_create() { return new ctitandb_options_t; }
+ctitandb_options_t* ctitandb_options_create() { PrintLog(__FUNCTION__); return new ctitandb_options_t; }
 
-void ctitandb_options_destroy(ctitandb_options_t* opts) { delete opts; }
+void ctitandb_options_destroy(ctitandb_options_t* opts) { PrintLog(__FUNCTION__); delete opts; }
 
-ctitandb_options_t* ctitandb_options_copy(ctitandb_options_t* src) {
+ctitandb_options_t* ctitandb_options_copy(ctitandb_options_t* src) { PrintLog(__FUNCTION__);
   if (src == nullptr) {
     return nullptr;
   }
   return new ctitandb_options_t{src->rep};
 }
 
-void ctitandb_options_set_rocksdb_options(ctitandb_options_t* opts, const crocksdb_options_t* rocksdb_opts) {
+void ctitandb_options_set_rocksdb_options(ctitandb_options_t* opts, const crocksdb_options_t* rocksdb_opts) { PrintLog(__FUNCTION__);
   *(DBOptions*)&opts->rep = rocksdb_opts->rep;
   *(ColumnFamilyOptions*)&opts->rep = rocksdb_opts->rep;
 }
 
 ctitandb_options_t* ctitandb_get_titan_options_cf(
     const crocksdb_t* db,
-    crocksdb_column_family_handle_t* column_family) {
+    crocksdb_column_family_handle_t* column_family) { PrintLog(__FUNCTION__);
   ctitandb_options_t* options = new ctitandb_options_t;
    TitanDB* titan_db = reinterpret_cast<TitanDB*>(db->rep);
   options->rep = titan_db->GetTitanOptions(column_family->rep);
   return options;
 }
 
-ctitandb_options_t* ctitandb_get_titan_db_options(crocksdb_t* db) {
+ctitandb_options_t* ctitandb_get_titan_db_options(crocksdb_t* db) { PrintLog(__FUNCTION__);
   ctitandb_options_t* options = new ctitandb_options_t;
   TitanDB* titan_db = reinterpret_cast<TitanDB*>(db->rep);
   *static_cast<TitanDBOptions*>(&options->rep) = titan_db->GetTitanDBOptions();
   return options;
 }
 
-const char* ctitandb_options_dirname(ctitandb_options_t* opts) {
+const char* ctitandb_options_dirname(ctitandb_options_t* opts) { PrintLog(__FUNCTION__);
   return opts->rep.dirname.c_str();
 }
 
-void ctitandb_options_set_dirname(ctitandb_options_t* opts, const char* name) {
+void ctitandb_options_set_dirname(ctitandb_options_t* opts, const char* name) { PrintLog(__FUNCTION__);
   opts->rep.dirname = name;
 }
 
-uint64_t ctitandb_options_min_blob_size(ctitandb_options_t* opts) {
+uint64_t ctitandb_options_min_blob_size(ctitandb_options_t* opts) { PrintLog(__FUNCTION__);
   return opts->rep.min_blob_size;
 }
 
 void ctitandb_options_set_min_blob_size(ctitandb_options_t* opts,
-                                        uint64_t size) {
+                                        uint64_t size) { PrintLog(__FUNCTION__);
   opts->rep.min_blob_size = size;
 }
 
-int ctitandb_options_blob_file_compression(ctitandb_options_t* opts) {
+int ctitandb_options_blob_file_compression(ctitandb_options_t* opts) { PrintLog(__FUNCTION__);
   return opts->rep.blob_file_compression;
 }
 
 void ctitandb_options_set_blob_file_compression(ctitandb_options_t* opts,
-                                                int type) {
+                                                int type) { PrintLog(__FUNCTION__);
   opts->rep.blob_file_compression = static_cast<CompressionType>(type);
 }
 
 void ctitandb_options_set_gc_merge_rewrite(ctitandb_options_t* opts,
-                                               unsigned char enable) {
+                                               unsigned char enable) { PrintLog(__FUNCTION__);
   opts->rep.gc_merge_rewrite = enable;
 }
 
 void ctitandb_decode_blob_index(const char* value, size_t value_size,
-                                ctitandb_blob_index_t* index, char** errptr) {
+                                ctitandb_blob_index_t* index, char** errptr) { PrintLog(__FUNCTION__);
   Slice v(value, value_size);
   BlobIndex bi;
   if (SaveError(errptr, bi.DecodeFrom(&v))) {
@@ -5689,7 +5688,7 @@ void ctitandb_decode_blob_index(const char* value, size_t value_size,
 }
 
 void ctitandb_encode_blob_index(const ctitandb_blob_index_t* index,
-                                char** value, size_t* value_size) {
+                                char** value, size_t* value_size) { PrintLog(__FUNCTION__);
   BlobIndex bi;
   bi.file_number = index->file_number;
   bi.blob_handle.offset = index->blob_offset;
@@ -5701,75 +5700,75 @@ void ctitandb_encode_blob_index(const ctitandb_blob_index_t* index,
 }
 
 void ctitandb_options_set_disable_background_gc(ctitandb_options_t* options,
-                                                unsigned char disable) {
+                                                unsigned char disable) { PrintLog(__FUNCTION__);
   options->rep.disable_background_gc = disable;
 }
 
 void ctitandb_options_set_level_merge(ctitandb_options_t* options,
-                                                unsigned char enable) {
+                                                unsigned char enable) { PrintLog(__FUNCTION__);
   options->rep.level_merge = enable;
 }
 
 void ctitandb_options_set_range_merge(ctitandb_options_t* options,
-                                                unsigned char enable) {
+                                                unsigned char enable) { PrintLog(__FUNCTION__);
   options->rep.range_merge = enable;
 }
 
 void ctitandb_options_set_max_sorted_runs(ctitandb_options_t* options,
-                                            int size) {
+                                            int size) { PrintLog(__FUNCTION__);
   options->rep.max_sorted_runs = size;
 }
 
 void ctitandb_options_set_max_gc_batch_size(ctitandb_options_t* options,
-                                            uint64_t size) {
+                                            uint64_t size) { PrintLog(__FUNCTION__);
   options->rep.max_gc_batch_size = size;
 }
 
 void ctitandb_options_set_min_gc_batch_size(ctitandb_options_t* options,
-                                            uint64_t size) {
+                                            uint64_t size) { PrintLog(__FUNCTION__);
   options->rep.min_gc_batch_size = size;
 }
 
 void ctitandb_options_set_blob_file_discardable_ratio(
-    ctitandb_options_t* options, double ratio) {
+    ctitandb_options_t* options, double ratio) { PrintLog(__FUNCTION__);
   options->rep.blob_file_discardable_ratio = ratio;
 }
 
 void ctitandb_options_set_sample_file_size_ratio(ctitandb_options_t* options,
-                                                 double ratio) {
+                                                 double ratio) { PrintLog(__FUNCTION__);
   options->rep.sample_file_size_ratio = ratio;
 }
 
 void ctitandb_options_set_merge_small_file_threshold(
-    ctitandb_options_t* options, uint64_t size) {
+    ctitandb_options_t* options, uint64_t size) { PrintLog(__FUNCTION__);
   options->rep.merge_small_file_threshold = size;
 }
 
 void ctitandb_options_set_max_background_gc(ctitandb_options_t* options,
-                                            int32_t size) {
+                                            int32_t size) { PrintLog(__FUNCTION__);
   options->rep.max_background_gc = size;
 }
 
 void ctitandb_options_set_purge_obsolete_files_period_sec(
-    ctitandb_options_t* options, unsigned int period) {
+    ctitandb_options_t* options, unsigned int period) { PrintLog(__FUNCTION__);
   options->rep.purge_obsolete_files_period_sec = period;
 }
 
 void ctitandb_options_set_blob_cache(ctitandb_options_t* options,
-                                     crocksdb_cache_t* cache) {
+                                     crocksdb_cache_t* cache) { PrintLog(__FUNCTION__);
   if (cache) {
     options->rep.blob_cache = cache->rep;
   }
 }
 
-size_t ctitandb_options_get_blob_cache_usage(ctitandb_options_t *opt) {
+size_t ctitandb_options_get_blob_cache_usage(ctitandb_options_t *opt) { PrintLog(__FUNCTION__);
   if (opt && opt->rep.blob_cache != nullptr) {
     return opt->rep.blob_cache->GetUsage();
   }
   return 0;
 }
 
-void ctitandb_options_set_blob_cache_capacity(ctitandb_options_t* opt, size_t capacity, char **errptr) {
+void ctitandb_options_set_blob_cache_capacity(ctitandb_options_t* opt, size_t capacity, char **errptr) { PrintLog(__FUNCTION__);
   Status s;
   if (opt && opt->rep.blob_cache != nullptr) {
     return opt->rep.blob_cache->SetCapacity(capacity);
@@ -5779,7 +5778,7 @@ void ctitandb_options_set_blob_cache_capacity(ctitandb_options_t* opt, size_t ca
   SaveError(errptr, s);
 }
 
-size_t ctitandb_options_get_blob_cache_capacity(ctitandb_options_t* opt) {
+size_t ctitandb_options_get_blob_cache_capacity(ctitandb_options_t* opt) { PrintLog(__FUNCTION__);
   if (opt && opt->rep.blob_cache != nullptr) {
     return opt->rep.blob_cache->GetCapacity();
   }
@@ -5787,17 +5786,17 @@ size_t ctitandb_options_get_blob_cache_capacity(ctitandb_options_t* opt) {
 }
 
 void ctitandb_options_set_discardable_ratio(ctitandb_options_t* options,
-                                            double ratio) {
+                                            double ratio) { PrintLog(__FUNCTION__);
   options->rep.blob_file_discardable_ratio = ratio;
 }
 
 void ctitandb_options_set_sample_ratio(ctitandb_options_t* options,
-                                       double ratio) {
+                                       double ratio) { PrintLog(__FUNCTION__);
   options->rep.sample_file_size_ratio = ratio;
 }
 
 void ctitandb_options_set_blob_run_mode(ctitandb_options_t* options,
-                                        int mode) {
+                                        int mode) { PrintLog(__FUNCTION__);
   options->rep.blob_run_mode = static_cast<TitanBlobRunMode>(mode);
 }
 
@@ -5806,27 +5805,27 @@ struct ctitandb_readoptions_t {
   TitanReadOptions rep;
 };
 
-ctitandb_readoptions_t* ctitandb_readoptions_create() {
+ctitandb_readoptions_t* ctitandb_readoptions_create() { PrintLog(__FUNCTION__);
   return new ctitandb_readoptions_t;
 }
 
-void ctitandb_readoptions_destroy(ctitandb_readoptions_t* opts) {
+void ctitandb_readoptions_destroy(ctitandb_readoptions_t* opts) { PrintLog(__FUNCTION__);
   delete opts;
 }
 
-unsigned char ctitandb_readoptions_key_only(ctitandb_readoptions_t* opts) {
+unsigned char ctitandb_readoptions_key_only(ctitandb_readoptions_t* opts) { PrintLog(__FUNCTION__);
   return opts->rep.key_only;
 }
 
 void ctitandb_readoptions_set_key_only(ctitandb_readoptions_t* opts,
-                                        unsigned char v) {
+                                        unsigned char v) { PrintLog(__FUNCTION__);
   opts->rep.key_only = v;
 }
 
 crocksdb_iterator_t* ctitandb_create_iterator(
     crocksdb_t* db,
     const crocksdb_readoptions_t* options,
-    const ctitandb_readoptions_t* titan_options) {
+    const ctitandb_readoptions_t* titan_options) { PrintLog(__FUNCTION__);
   crocksdb_iterator_t* result = new crocksdb_iterator_t;
   if (titan_options == nullptr) {
     result->rep = db->rep->NewIterator(options->rep);
@@ -5841,7 +5840,7 @@ crocksdb_iterator_t* ctitandb_create_iterator_cf(
     crocksdb_t* db,
     const crocksdb_readoptions_t* options,
     const ctitandb_readoptions_t* titan_options,
-    crocksdb_column_family_handle_t* column_family) {
+    crocksdb_column_family_handle_t* column_family) { PrintLog(__FUNCTION__);
   crocksdb_iterator_t* result = new crocksdb_iterator_t;
   if (titan_options == nullptr) {
     result->rep = db->rep->NewIterator(options->rep, column_family->rep);
@@ -5859,7 +5858,7 @@ void ctitandb_create_iterators(
     crocksdb_column_family_handle_t** column_families,
     crocksdb_iterator_t** iterators,
     size_t size,
-    char** errptr) {
+    char** errptr) { PrintLog(__FUNCTION__);
   std::vector<ColumnFamilyHandle*> column_families_vec(size);
   for (size_t i = 0; i < size; i++) {
     column_families_vec.push_back(column_families[i]->rep);
@@ -5891,7 +5890,7 @@ void ctitandb_delete_files_in_range(
     crocksdb_t* db,
     const char* start_key, size_t start_key_len,
     const char* limit_key, size_t limit_key_len,
-    unsigned char include_end, char** errptr) {
+    unsigned char include_end, char** errptr) { PrintLog(__FUNCTION__);
   Slice a, b;
   RangePtr range(
     start_key ? (a = Slice(start_key, start_key_len), &a) : nullptr,
@@ -5909,7 +5908,7 @@ void ctitandb_delete_files_in_range_cf(
     crocksdb_t* db, crocksdb_column_family_handle_t* column_family,
     const char* start_key, size_t start_key_len,
     const char* limit_key, size_t limit_key_len,
-    unsigned char include_end, char** errptr) {
+    unsigned char include_end, char** errptr) { PrintLog(__FUNCTION__);
   Slice a, b;
   RangePtr range(
     start_key ? (a = Slice(start_key, start_key_len), &a) : nullptr,
@@ -5927,7 +5926,7 @@ void ctitandb_delete_files_in_ranges_cf(
     crocksdb_t* db, crocksdb_column_family_handle_t* cf,
     const char* const* start_keys, const size_t* start_keys_lens,
     const char* const* limit_keys, const size_t* limit_keys_lens,
-    size_t num_ranges, unsigned char include_end, char** errptr) {
+    size_t num_ranges, unsigned char include_end, char** errptr) { PrintLog(__FUNCTION__);
   std::vector<Slice> starts(num_ranges);
   std::vector<Slice> limits(num_ranges);
   std::vector<RangePtr> ranges(num_ranges);
@@ -5955,7 +5954,7 @@ void ctitandb_delete_blob_files_in_range(crocksdb_t* db, const char* start_key,
                                          const char* limit_key,
                                          size_t limit_key_len,
                                          unsigned char include_end,
-                                         char** errptr) {
+                                         char** errptr) { PrintLog(__FUNCTION__);
   Slice a, b;
   RangePtr range(
       start_key ? (a = Slice(start_key, start_key_len), &a) : nullptr,
@@ -5969,7 +5968,7 @@ void ctitandb_delete_blob_files_in_range(crocksdb_t* db, const char* start_key,
 void ctitandb_delete_blob_files_in_range_cf(
     crocksdb_t* db, crocksdb_column_family_handle_t* column_family,
     const char* start_key, size_t start_key_len, const char* limit_key,
-    size_t limit_key_len, unsigned char include_end, char** errptr) {
+    size_t limit_key_len, unsigned char include_end, char** errptr) { PrintLog(__FUNCTION__);
   Slice a, b;
   RangePtr range(
       start_key ? (a = Slice(start_key, start_key_len), &a) : nullptr,
@@ -5983,7 +5982,7 @@ void ctitandb_delete_blob_files_in_ranges_cf(
     crocksdb_t* db, crocksdb_column_family_handle_t* cf,
     const char* const* start_keys, const size_t* start_keys_lens,
     const char* const* limit_keys, const size_t* limit_keys_lens,
-    size_t num_ranges, unsigned char include_end, char** errptr) {
+    size_t num_ranges, unsigned char include_end, char** errptr) { PrintLog(__FUNCTION__);
   std::vector<Slice> starts(num_ranges);
   std::vector<Slice> limits(num_ranges);
   std::vector<RangePtr> ranges(num_ranges);
