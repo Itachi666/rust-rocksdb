@@ -610,6 +610,8 @@ crocksdb_t* crocksdb_open_with_ttl(
     const char* name,
     int ttl,
     char** errptr) {
+  logger = options->rep.info_log;
+  logger->SetInfoLogLevel(InfoLogLevel::INFO_LEVEL);
   ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   DBWithTTL* db;
   if (SaveError(errptr, DBWithTTL::Open(options->rep, std::string(name), &db, ttl))) {
@@ -625,6 +627,8 @@ crocksdb_t* crocksdb_open_for_read_only(
     const char* name,
     unsigned char error_if_log_file_exist,
     char** errptr) {
+  logger = options->rep.info_log;
+  logger->SetInfoLogLevel(InfoLogLevel::INFO_LEVEL);
   ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   DB* db;
   if (SaveError(errptr, DB::OpenForReadOnly(options->rep, std::string(name), &db, error_if_log_file_exist))) {
@@ -764,6 +768,8 @@ crocksdb_t* crocksdb_open_column_families(
     const crocksdb_options_t** column_family_options,
     crocksdb_column_family_handle_t** column_family_handles,
     char** errptr) {
+  logger = options->rep.info_log;
+  logger->SetInfoLogLevel(InfoLogLevel::INFO_LEVEL);
   ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   std::vector<ColumnFamilyDescriptor> column_families;
   for (int i = 0; i < num_column_families; i++) {
@@ -799,6 +805,8 @@ crocksdb_t* crocksdb_open_column_families_with_ttl(
     unsigned char read_only,
     crocksdb_column_family_handle_t** column_family_handles,
     char** errptr) {
+  logger = options->rep.info_log;
+  logger->SetInfoLogLevel(InfoLogLevel::INFO_LEVEL);
   ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   std::vector<ColumnFamilyDescriptor> column_families;
   std::vector<int32_t> ttls;
@@ -835,6 +843,8 @@ crocksdb_t* crocksdb_open_for_read_only_column_families(
     crocksdb_column_family_handle_t** column_family_handles,
     unsigned char error_if_log_file_exist,
     char** errptr) {
+  logger = options->rep.info_log;
+  logger->SetInfoLogLevel(InfoLogLevel::INFO_LEVEL);
   ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   std::vector<ColumnFamilyDescriptor> column_families;
   for (int i = 0; i < num_column_families; i++) {
