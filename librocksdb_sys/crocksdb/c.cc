@@ -589,8 +589,7 @@ crocksdb_t* crocksdb_open(
     const crocksdb_options_t* options,
     const char* name,
     char** errptr) {
-  // env->NewLogger("/tmp/tikv.log", &logger);
-  // logger->SetInfoLogLevel(InfoLogLevel::INFO_LEVEL);
+  CreateLoggerFromOptions(std::string(name), options->rep, &logger);
   ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
 
   DB* db;
@@ -607,6 +606,7 @@ crocksdb_t* crocksdb_open_with_ttl(
     const char* name,
     int ttl,
     char** errptr) {
+  CreateLoggerFromOptions(std::string(name), options->rep, &logger);
   ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   DBWithTTL* db;
   if (SaveError(errptr, DBWithTTL::Open(options->rep, std::string(name), &db, ttl))) {
@@ -622,6 +622,7 @@ crocksdb_t* crocksdb_open_for_read_only(
     const char* name,
     unsigned char error_if_log_file_exist,
     char** errptr) {
+  CreateLoggerFromOptions(std::string(name), options->rep, &logger);
   ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   DB* db;
   if (SaveError(errptr, DB::OpenForReadOnly(options->rep, std::string(name), &db, error_if_log_file_exist))) {
@@ -761,7 +762,9 @@ crocksdb_t* crocksdb_open_column_families(
     const crocksdb_options_t** column_family_options,
     crocksdb_column_family_handle_t** column_family_handles,
     char** errptr) {
+  CreateLoggerFromOptions(std::string(name), db_options->rep, &logger);
   ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
+  
   std::vector<ColumnFamilyDescriptor> column_families;
   for (int i = 0; i < num_column_families; i++) {
     column_families.push_back(ColumnFamilyDescriptor(
@@ -796,6 +799,7 @@ crocksdb_t* crocksdb_open_column_families_with_ttl(
     unsigned char read_only,
     crocksdb_column_family_handle_t** column_family_handles,
     char** errptr) {
+  CreateLoggerFromOptions(std::string(name), db_options->rep, &logger);
   ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   std::vector<ColumnFamilyDescriptor> column_families;
   std::vector<int32_t> ttls;
@@ -832,6 +836,7 @@ crocksdb_t* crocksdb_open_for_read_only_column_families(
     crocksdb_column_family_handle_t** column_family_handles,
     unsigned char error_if_log_file_exist,
     char** errptr) {
+  CreateLoggerFromOptions(std::string(name), db_options->rep, &logger);
   ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   std::vector<ColumnFamilyDescriptor> column_families;
   for (int i = 0; i < num_column_families; i++) {
@@ -899,14 +904,17 @@ void crocksdb_drop_column_family(
     crocksdb_t* db,
     crocksdb_column_family_handle_t* handle,
     char** errptr) {
+  ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   SaveError(errptr, db->rep->DropColumnFamily(handle->rep));
 }
 
 uint32_t crocksdb_column_family_handle_id(crocksdb_column_family_handle_t* handle) {
+  ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   return handle->rep->GetID();
 }
 
 void crocksdb_column_family_handle_destroy(crocksdb_column_family_handle_t* handle) {
+  ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   delete handle->rep;
   delete handle;
 }
@@ -917,6 +925,7 @@ void crocksdb_put(
     const char* key, size_t keylen,
     const char* val, size_t vallen,
     char** errptr) {
+  ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   SaveError(errptr,
             db->rep->Put(options->rep, Slice(key, keylen), Slice(val, vallen)));
 }
@@ -928,6 +937,7 @@ void crocksdb_put_cf(
     const char* key, size_t keylen,
     const char* val, size_t vallen,
     char** errptr) {
+  ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   SaveError(errptr,
             db->rep->Put(options->rep, column_family->rep,
               Slice(key, keylen), Slice(val, vallen)));
@@ -938,6 +948,7 @@ void crocksdb_delete(
     const crocksdb_writeoptions_t* options,
     const char* key, size_t keylen,
     char** errptr) {
+  ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   SaveError(errptr, db->rep->Delete(options->rep, Slice(key, keylen)));
 }
 
@@ -947,6 +958,7 @@ void crocksdb_delete_cf(
     crocksdb_column_family_handle_t* column_family,
     const char* key, size_t keylen,
     char** errptr) {
+  ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   SaveError(errptr, db->rep->Delete(options->rep, column_family->rep,
         Slice(key, keylen)));
 }
@@ -956,6 +968,7 @@ void crocksdb_single_delete(
     const crocksdb_writeoptions_t* options,
     const char* key, size_t keylen,
     char** errptr) {
+  ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   SaveError(errptr, db->rep->SingleDelete(options->rep, Slice(key, keylen)));
 }
 
@@ -965,6 +978,7 @@ void crocksdb_single_delete_cf(
     crocksdb_column_family_handle_t* column_family,
     const char* key, size_t keylen,
     char** errptr) {
+  ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   SaveError(errptr, db->rep->SingleDelete(options->rep, column_family->rep,
         Slice(key, keylen)));
 }
@@ -976,6 +990,7 @@ void crocksdb_delete_range_cf(
     const char* begin_key, size_t begin_keylen,
     const char* end_key, size_t end_keylen,
     char** errptr) {
+  ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   SaveError(errptr, db->rep->DeleteRange(options->rep, column_family->rep,
         Slice(begin_key, begin_keylen), Slice(end_key, end_keylen)));
 }
@@ -986,6 +1001,7 @@ void crocksdb_merge(
     const char* key, size_t keylen,
     const char* val, size_t vallen,
     char** errptr) {
+  ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   SaveError(errptr,
             db->rep->Merge(options->rep, Slice(key, keylen), Slice(val, vallen)));
 }
@@ -997,6 +1013,7 @@ void crocksdb_merge_cf(
     const char* key, size_t keylen,
     const char* val, size_t vallen,
     char** errptr) {
+  ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   SaveError(errptr,
             db->rep->Merge(options->rep, column_family->rep,
               Slice(key, keylen), Slice(val, vallen)));
@@ -1007,6 +1024,7 @@ void crocksdb_write(
     const crocksdb_writeoptions_t* options,
     crocksdb_writebatch_t* batch,
     char** errptr) {
+  ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   SaveError(errptr, db->rep->Write(options->rep, &batch->rep));
 }
 
@@ -1016,6 +1034,7 @@ void crocksdb_write_multi_batch(
     crocksdb_writebatch_t** batches,
     size_t batch_size,
     char** errptr) {
+  ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   std::vector<WriteBatch*> ws;
   for (size_t i = 0; i < batch_size; i ++) {
     ws.push_back(&batches[i]->rep);
@@ -1029,6 +1048,7 @@ char* crocksdb_get(
     const char* key, size_t keylen,
     size_t* vallen,
     char** errptr) {
+  ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   char* result = nullptr;
   std::string tmp;
   Status s = db->rep->Get(options->rep, Slice(key, keylen), &tmp);
@@ -1051,6 +1071,7 @@ char* crocksdb_get_cf(
     const char* key, size_t keylen,
     size_t* vallen,
     char** errptr) {
+  ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   char* result = nullptr;
   std::string tmp;
   Status s = db->rep->Get(options->rep, column_family->rep,
@@ -1074,6 +1095,7 @@ void crocksdb_multi_get(
     const size_t* keys_list_sizes,
     char** values_list, size_t* values_list_sizes,
     char** errs) {
+  ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   std::vector<Slice> keys(num_keys);
   for (size_t i = 0; i < num_keys; i++) {
     keys[i] = Slice(keys_list[i], keys_list_sizes[i]);
@@ -1105,6 +1127,7 @@ void crocksdb_multi_get_cf(
     const size_t* keys_list_sizes,
     char** values_list, size_t* values_list_sizes,
     char** errs) {
+  ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   std::vector<Slice> keys(num_keys);
   std::vector<ColumnFamilyHandle*> cfs(num_keys);
   for (size_t i = 0; i < num_keys; i++) {
@@ -1133,6 +1156,7 @@ void crocksdb_multi_get_cf(
 crocksdb_iterator_t* crocksdb_create_iterator(
     crocksdb_t* db,
     const crocksdb_readoptions_t* options) {
+  ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   crocksdb_iterator_t* result = new crocksdb_iterator_t;
   result->rep = db->rep->NewIterator(options->rep);
   return result;
@@ -1142,6 +1166,7 @@ crocksdb_iterator_t* crocksdb_create_iterator_cf(
     crocksdb_t* db,
     const crocksdb_readoptions_t* options,
     crocksdb_column_family_handle_t* column_family) {
+  ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   crocksdb_iterator_t* result = new crocksdb_iterator_t;
   result->rep = db->rep->NewIterator(options->rep, column_family->rep);
   return result;
@@ -1154,6 +1179,7 @@ void crocksdb_create_iterators(
     crocksdb_iterator_t** iterators,
     size_t size,
     char** errptr) {
+  ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   std::vector<ColumnFamilyHandle*> column_families_vec(size);
   for (size_t i = 0; i < size; i++) {
     column_families_vec.push_back(column_families[i]->rep);
@@ -1177,6 +1203,7 @@ void crocksdb_create_iterators(
 
 const crocksdb_snapshot_t* crocksdb_create_snapshot(
     crocksdb_t* db) {
+  ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   crocksdb_snapshot_t* result = new crocksdb_snapshot_t;
   result->rep = db->rep->GetSnapshot();
   return result;
@@ -2355,17 +2382,17 @@ void crocksdb_options_set_env(crocksdb_options_t* opt, crocksdb_env_t* env) {
 }
 
 void crocksdb_options_set_info_log(crocksdb_options_t* opt, crocksdb_logger_t* l) {
+  ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   if (l) {
     opt->rep.info_log = l->rep;
     logger = l->rep;
-    logger->SetInfoLogLevel(InfoLogLevel::DEBUG_LEVEL);
-    ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
-    ROCKS_LOG_HEADER(logger, "Calling %s", __FUNCTION__);
+    ROCKS_LOG_INFO(logger, "New Set log Calling %s", __FUNCTION__);
   }
 }
 
 void crocksdb_options_set_info_log_level(
     crocksdb_options_t* opt, int v) {
+  ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   opt->rep.info_log_level = static_cast<InfoLogLevel>(v);
 }
 
