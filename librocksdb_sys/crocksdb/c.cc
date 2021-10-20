@@ -583,20 +583,19 @@ static char* CopyString(const std::string& str) {
   return result;
 }
 
-static void PrintLog(const char* function) {
-  std::shared_ptr<Logger> logger;
-  Env* env = new rocksdb::EnvWrapper(Env::Default());
-  env->NewLogger("/tmp/tikv.log", &logger);
-  logger->SetInfoLogLevel(InfoLogLevel::INFO_LEVEL);
-  ROCKS_LOG_INFO(logger, "Calling %s", function);
-  delete env;
-}
+std::shared_ptr<Logger> logger;
+Env* env = new rocksdb::EnvWrapper(Env::Default());
 
 crocksdb_t* crocksdb_open(
     const crocksdb_options_t* options,
     const char* name,
     char** errptr) {
-  PrintLog(__FUNCTION__);
+  // env->NewLogger("/tmp/tikv.log", &logger);
+  // logger->SetInfoLogLevel(InfoLogLevel::INFO_LEVEL);
+  logger = options->rep.info_log;
+  logger->SetInfoLogLevel(InfoLogLevel::INFO_LEVEL);
+  ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
+
   DB* db;
   if (SaveError(errptr, DB::Open(options->rep, std::string(name), &db))) {
     return nullptr;
@@ -611,7 +610,7 @@ crocksdb_t* crocksdb_open_with_ttl(
     const char* name,
     int ttl,
     char** errptr) {
-  PrintLog(__FUNCTION__);
+  ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   DBWithTTL* db;
   if (SaveError(errptr, DBWithTTL::Open(options->rep, std::string(name), &db, ttl))) {
     return nullptr;
@@ -626,7 +625,7 @@ crocksdb_t* crocksdb_open_for_read_only(
     const char* name,
     unsigned char error_if_log_file_exist,
     char** errptr) {
-  PrintLog(__FUNCTION__);
+  ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   DB* db;
   if (SaveError(errptr, DB::OpenForReadOnly(options->rep, std::string(name), &db, error_if_log_file_exist))) {
     return nullptr;
@@ -637,13 +636,13 @@ crocksdb_t* crocksdb_open_for_read_only(
 }
 
 void crocksdb_status_ptr_get_error(crocksdb_status_ptr_t* status, char** errptr) {
-  PrintLog(__FUNCTION__);
+  ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   SaveError(errptr, *(status->rep));
 }
 
 crocksdb_backup_engine_t* crocksdb_backup_engine_open(
     const crocksdb_options_t* options, const char* path, char** errptr) {
-  PrintLog(__FUNCTION__);
+  ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   BackupEngine* be;
   if (SaveError(errptr, BackupEngine::Open(options->rep.env,
                                            BackupableDBOptions(path), &be))) {
@@ -656,37 +655,37 @@ crocksdb_backup_engine_t* crocksdb_backup_engine_open(
 
 void crocksdb_backup_engine_create_new_backup(crocksdb_backup_engine_t* be,
                                              crocksdb_t* db, char** errptr) {
-  PrintLog(__FUNCTION__);
+  ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   SaveError(errptr, be->rep->CreateNewBackup(db->rep));
 }
 
 void crocksdb_backup_engine_purge_old_backups(crocksdb_backup_engine_t* be,
                                              uint32_t num_backups_to_keep,
                                              char** errptr) {
-  PrintLog(__FUNCTION__);
+  ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   SaveError(errptr, be->rep->PurgeOldBackups(num_backups_to_keep));
 }
 
 crocksdb_restore_options_t* crocksdb_restore_options_create() {
-  PrintLog(__FUNCTION__);
+  ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   return new crocksdb_restore_options_t;
 }
 
 void crocksdb_restore_options_destroy(crocksdb_restore_options_t* opt) {
-  PrintLog(__FUNCTION__);
+  ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   delete opt;
 }
 
 void crocksdb_restore_options_set_keep_log_files(crocksdb_restore_options_t* opt,
                                                 int v) {
-  PrintLog(__FUNCTION__);
+  ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   opt->rep.keep_log_files = v;
 }
 
 void crocksdb_backup_engine_restore_db_from_latest_backup(
     crocksdb_backup_engine_t* be, const char* db_dir, const char* wal_dir,
     const crocksdb_restore_options_t* restore_options, char** errptr) {
-  PrintLog(__FUNCTION__);
+  ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   SaveError(errptr, be->rep->RestoreDBFromLatestBackup(std::string(db_dir),
                                                        std::string(wal_dir),
                                                        restore_options->rep));
@@ -694,66 +693,67 @@ void crocksdb_backup_engine_restore_db_from_latest_backup(
 
 const crocksdb_backup_engine_info_t* crocksdb_backup_engine_get_backup_info(
     crocksdb_backup_engine_t* be) {
-  PrintLog(__FUNCTION__);
+  ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   crocksdb_backup_engine_info_t* result = new crocksdb_backup_engine_info_t;
   be->rep->GetBackupInfo(&result->rep);
   return result;
 }
 
 int crocksdb_backup_engine_info_count(const crocksdb_backup_engine_info_t* info) {
-  PrintLog(__FUNCTION__);
+  ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   return static_cast<int>(info->rep.size());
 }
 
 int64_t crocksdb_backup_engine_info_timestamp(
     const crocksdb_backup_engine_info_t* info, int index) {
-  PrintLog(__FUNCTION__);
+  ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   return info->rep[index].timestamp;
 }
 
 uint32_t crocksdb_backup_engine_info_backup_id(
     const crocksdb_backup_engine_info_t* info, int index) {
-  PrintLog(__FUNCTION__);
+  ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   return info->rep[index].backup_id;
 }
 
 uint64_t crocksdb_backup_engine_info_size(
     const crocksdb_backup_engine_info_t* info, int index) {
-  PrintLog(__FUNCTION__);
+  ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   return info->rep[index].size;
 }
 
 uint32_t crocksdb_backup_engine_info_number_files(
     const crocksdb_backup_engine_info_t* info, int index) {
-  PrintLog(__FUNCTION__);
+  ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   return info->rep[index].number_files;
 }
 
 void crocksdb_backup_engine_info_destroy(
     const crocksdb_backup_engine_info_t* info) {
-  PrintLog(__FUNCTION__);
+  ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   delete info;
 }
 
 void crocksdb_backup_engine_close(crocksdb_backup_engine_t* be) {
-  PrintLog(__FUNCTION__);
+  ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   delete be->rep;
   delete be;
 }
 
 void crocksdb_close(crocksdb_t* db) {
-  PrintLog(__FUNCTION__);
+  ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
+  delete logger;
   delete db->rep;
   delete db;
 }
 
 void crocksdb_pause_bg_work(crocksdb_t* db) {
-  PrintLog(__FUNCTION__);
+  ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   db->rep->PauseBackgroundWork();
 }
 
 void crocksdb_continue_bg_work(crocksdb_t* db) {
-  PrintLog(__FUNCTION__);
+  ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   db->rep->ContinueBackgroundWork();
 }
 
@@ -765,7 +765,7 @@ crocksdb_t* crocksdb_open_column_families(
     const crocksdb_options_t** column_family_options,
     crocksdb_column_family_handle_t** column_family_handles,
     char** errptr) {
-  PrintLog(__FUNCTION__);
+  ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   std::vector<ColumnFamilyDescriptor> column_families;
   for (int i = 0; i < num_column_families; i++) {
     column_families.push_back(ColumnFamilyDescriptor(
@@ -800,7 +800,7 @@ crocksdb_t* crocksdb_open_column_families_with_ttl(
     unsigned char read_only,
     crocksdb_column_family_handle_t** column_family_handles,
     char** errptr) {
-  PrintLog(__FUNCTION__);
+  ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   std::vector<ColumnFamilyDescriptor> column_families;
   std::vector<int32_t> ttls;
   for (int i = 0; i < num_column_families; i++) {
@@ -836,7 +836,7 @@ crocksdb_t* crocksdb_open_for_read_only_column_families(
     crocksdb_column_family_handle_t** column_family_handles,
     unsigned char error_if_log_file_exist,
     char** errptr) {
-  PrintLog(__FUNCTION__);
+  ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   std::vector<ColumnFamilyDescriptor> column_families;
   for (int i = 0; i < num_column_families; i++) {
     column_families.push_back(ColumnFamilyDescriptor(
@@ -866,7 +866,7 @@ char** crocksdb_list_column_families(
     const char* name,
     size_t* lencfs,
     char** errptr) {
-  PrintLog(__FUNCTION__);
+  ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   std::vector<std::string> fams;
   SaveError(errptr,
       DB::ListColumnFamilies(DBOptions(options->rep),
