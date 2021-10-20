@@ -584,7 +584,6 @@ static char* CopyString(const std::string& str) {
 }
 
 std::shared_ptr<Logger> logger;
-Env* env = new rocksdb::EnvWrapper(Env::Default());
 
 crocksdb_t* crocksdb_open(
     const crocksdb_options_t* options,
@@ -592,8 +591,6 @@ crocksdb_t* crocksdb_open(
     char** errptr) {
   // env->NewLogger("/tmp/tikv.log", &logger);
   // logger->SetInfoLogLevel(InfoLogLevel::INFO_LEVEL);
-  logger = options->rep.info_log;
-  logger->SetInfoLogLevel(InfoLogLevel::INFO_LEVEL);
   ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
 
   DB* db;
@@ -610,8 +607,6 @@ crocksdb_t* crocksdb_open_with_ttl(
     const char* name,
     int ttl,
     char** errptr) {
-  logger = options->rep.info_log;
-  logger->SetInfoLogLevel(InfoLogLevel::INFO_LEVEL);
   ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   DBWithTTL* db;
   if (SaveError(errptr, DBWithTTL::Open(options->rep, std::string(name), &db, ttl))) {
@@ -627,8 +622,6 @@ crocksdb_t* crocksdb_open_for_read_only(
     const char* name,
     unsigned char error_if_log_file_exist,
     char** errptr) {
-  logger = options->rep.info_log;
-  logger->SetInfoLogLevel(InfoLogLevel::INFO_LEVEL);
   ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   DB* db;
   if (SaveError(errptr, DB::OpenForReadOnly(options->rep, std::string(name), &db, error_if_log_file_exist))) {
@@ -768,8 +761,6 @@ crocksdb_t* crocksdb_open_column_families(
     const crocksdb_options_t** column_family_options,
     crocksdb_column_family_handle_t** column_family_handles,
     char** errptr) {
-  logger = db_options->rep.info_log;
-  logger->SetInfoLogLevel(InfoLogLevel::INFO_LEVEL);
   ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   std::vector<ColumnFamilyDescriptor> column_families;
   for (int i = 0; i < num_column_families; i++) {
@@ -805,8 +796,6 @@ crocksdb_t* crocksdb_open_column_families_with_ttl(
     unsigned char read_only,
     crocksdb_column_family_handle_t** column_family_handles,
     char** errptr) {
-  logger = db_options->rep.info_log;
-  logger->SetInfoLogLevel(InfoLogLevel::INFO_LEVEL);
   ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   std::vector<ColumnFamilyDescriptor> column_families;
   std::vector<int32_t> ttls;
@@ -843,8 +832,6 @@ crocksdb_t* crocksdb_open_for_read_only_column_families(
     crocksdb_column_family_handle_t** column_family_handles,
     unsigned char error_if_log_file_exist,
     char** errptr) {
-  logger = db_options->rep.info_log;
-  logger->SetInfoLogLevel(InfoLogLevel::INFO_LEVEL);
   ROCKS_LOG_INFO(logger, "Calling %s", __FUNCTION__);
   std::vector<ColumnFamilyDescriptor> column_families;
   for (int i = 0; i < num_column_families; i++) {
@@ -2370,12 +2357,14 @@ void crocksdb_options_set_env(crocksdb_options_t* opt, crocksdb_env_t* env) {
 void crocksdb_options_set_info_log(crocksdb_options_t* opt, crocksdb_logger_t* l) {
   if (l) {
     opt->rep.info_log = l->rep;
+    logger = l->rep;
   }
 }
 
 void crocksdb_options_set_info_log_level(
     crocksdb_options_t* opt, int v) {
   opt->rep.info_log_level = static_cast<InfoLogLevel>(v);
+  logger->SetInfoLogLevel(static_cast<InfoLogLevel>(v));
 }
 
 void crocksdb_options_set_db_write_buffer_size(crocksdb_options_t* opt,
