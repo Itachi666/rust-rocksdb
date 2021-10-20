@@ -2358,13 +2358,13 @@ void crocksdb_options_set_info_log(crocksdb_options_t* opt, crocksdb_logger_t* l
   if (l) {
     opt->rep.info_log = l->rep;
     logger = l->rep;
+    logger->SetInfoLogLevel(InfoLogLevel::DEBUG_LEVEL);
   }
 }
 
 void crocksdb_options_set_info_log_level(
     crocksdb_options_t* opt, int v) {
   opt->rep.info_log_level = static_cast<InfoLogLevel>(v);
-  logger->SetInfoLogLevel(static_cast<InfoLogLevel>(v));
 }
 
 void crocksdb_options_set_db_write_buffer_size(crocksdb_options_t* opt,
