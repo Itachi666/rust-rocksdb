@@ -5565,7 +5565,11 @@ crocksdb_t* ctitandb_open_column_families(
     const ctitandb_options_t* tdb_options, int num_column_families,
     const char** column_family_names,
     const ctitandb_options_t** titan_column_family_options,
-    crocksdb_column_family_handle_t** column_family_handles, char** errptr) { PrintLog(__FUNCTION__);
+    crocksdb_column_family_handle_t** column_family_handles, char** errptr) { 
+      
+  CreateLoggerFromOptions(std::string(name) + "/Calling", tdb_options->rep, &logger);
+  PrintLog(__FUNCTION__);
+
   std::vector<TitanCFDescriptor> column_families;
   for (int i = 0; i < num_column_families; i++) {
     column_families.push_back(
