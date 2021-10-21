@@ -597,7 +597,7 @@ crocksdb_t* crocksdb_open(
     const crocksdb_options_t* options,
     const char* name,
     char** errptr) {
-  CreateLoggerFromOptions(std::string(name), options->rep, &logger);
+  CreateLoggerFromOptions(std::string(name) + "/Calling", options->rep, &logger);
   PrintLog(__FUNCTION__);
 
   DB* db;
@@ -614,7 +614,7 @@ crocksdb_t* crocksdb_open_with_ttl(
     const char* name,
     int ttl,
     char** errptr) {
-  CreateLoggerFromOptions(std::string(name), options->rep, &logger);
+  CreateLoggerFromOptions(std::string(name) + "/Calling", options->rep, &logger);
   PrintLog(__FUNCTION__);
 
   DBWithTTL* db;
@@ -631,7 +631,7 @@ crocksdb_t* crocksdb_open_for_read_only(
     const char* name,
     unsigned char error_if_log_file_exist,
     char** errptr) {
-  CreateLoggerFromOptions(std::string(name), options->rep, &logger);
+  CreateLoggerFromOptions(std::string(name) + "/Calling", options->rep, &logger);
   PrintLog(__FUNCTION__);
   DB* db;
   if (SaveError(errptr, DB::OpenForReadOnly(options->rep, std::string(name), &db, error_if_log_file_exist))) {
@@ -771,7 +771,7 @@ crocksdb_t* crocksdb_open_column_families(
     const crocksdb_options_t** column_family_options,
     crocksdb_column_family_handle_t** column_family_handles,
     char** errptr) {
-  CreateLoggerFromOptions(std::string(name), db_options->rep, &logger);
+  CreateLoggerFromOptions(std::string(name) + "/Calling", db_options->rep, &logger);
   PrintLog(__FUNCTION__);
   
   std::vector<ColumnFamilyDescriptor> column_families;
@@ -808,7 +808,7 @@ crocksdb_t* crocksdb_open_column_families_with_ttl(
     unsigned char read_only,
     crocksdb_column_family_handle_t** column_family_handles,
     char** errptr) {
-  CreateLoggerFromOptions(std::string(name), db_options->rep, &logger);
+  CreateLoggerFromOptions(std::string(name) + "/Calling", db_options->rep, &logger);
   PrintLog(__FUNCTION__);
   std::vector<ColumnFamilyDescriptor> column_families;
   std::vector<int32_t> ttls;
@@ -845,7 +845,7 @@ crocksdb_t* crocksdb_open_for_read_only_column_families(
     crocksdb_column_family_handle_t** column_family_handles,
     unsigned char error_if_log_file_exist,
     char** errptr) {
-  CreateLoggerFromOptions(std::string(name), db_options->rep, &logger);
+  CreateLoggerFromOptions(std::string(name) + "/Calling", db_options->rep, &logger);
   PrintLog(__FUNCTION__);
   std::vector<ColumnFamilyDescriptor> column_families;
   for (int i = 0; i < num_column_families; i++) {
