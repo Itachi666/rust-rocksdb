@@ -584,13 +584,14 @@ static char* CopyString(const std::string& str) {
 }
 
 std::shared_ptr<Logger> logger;
-std::set<std::string> calledFunc;
+std::map<std::string, uint> calledFunc;
 static void PrintLog(const char* funcName) {
   std::string s = std::string(funcName);
   if (calledFunc.find(s) == calledFunc.end()) {
-    ROCKS_LOG_INFO(logger, "Calling %s", funcName);
-    calledFunc.insert(s);
+    calledFunc[s] = 0;
   }
+  calledFunc[s]++;
+  ROCKS_LOG_INFO(logger, "Calling %s %d times", funcName, calledFunc[s]);
 }
 
 crocksdb_t* crocksdb_open(
